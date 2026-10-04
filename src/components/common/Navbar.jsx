@@ -87,18 +87,6 @@ export default function Navbar() {
               </span>
             </button>
 
-            {/* Admin Portal Toggle */}
-            <button
-              onClick={() => setActiveView(activeView === 'admin' ? 'landing' : 'admin')}
-              className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all border ${
-                activeView === 'admin'
-                  ? 'bg-accent-amber text-bg-main border-accent-amber font-bold'
-                  : 'bg-black/40 backdrop-blur-md text-white/70 border-white/10 hover:text-white hover:border-white/25'
-              }`}
-            >
-              {activeView === 'admin' ? 'Exit Admin' : 'Admin'}
-            </button>
-
             {/* Pill CTA (like 'Install antislop' in reference) */}
             <a
               href="#catalog"
@@ -149,15 +137,13 @@ export default function Navbar() {
           ))}
           <div className="pt-3 border-t border-white/10 flex items-center justify-between">
             <span className="text-xs font-mono text-white/50">All prices in IDR (Rp)</span>
-            <button
-              onClick={() => {
-                setActiveView(activeView === 'admin' ? 'landing' : 'admin');
-                setMobileMenuOpen(false);
-              }}
-              className="text-xs font-mono px-3 py-1 rounded bg-white/10 border border-white/15 text-accent-amber"
+            <a
+              href="#catalog"
+              onClick={handleNavClick}
+              className="text-xs font-mono px-3 py-1 rounded bg-white/10 border border-white/15 text-white"
             >
-              {activeView === 'admin' ? 'Exit Admin' : 'Admin'}
-            </button>
+              Catalog
+            </a>
           </div>
         </div>
       )}

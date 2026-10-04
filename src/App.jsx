@@ -23,6 +23,29 @@ export default function App() {
   const [activePort, setActivePort] = useState('eth');
   const [checkoutSuccess, setCheckoutSuccess] = useState(false);
 
+  // Manual route listener (e.g. typing /#admin or /admin manually)
+  React.useEffect(() => {
+    const handleRoute = () => {
+      const hash = window.location.hash.toLowerCase();
+      const path = window.location.pathname.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (hash === '#admin' || path === '/admin' || search.includes('admin')) {
+        setActiveView('admin');
+      } else if (hash === '' || hash === '#catalog' || hash === '#schematic' || hash === '#specs' || hash === '#contact') {
+        if (window.location.hash !== '#admin') {
+          setActiveView('landing');
+        }
+      }
+    };
+    handleRoute();
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('popstate', handleRoute);
+    return () => {
+      window.removeEventListener('hashchange', handleRoute);
+      window.removeEventListener('popstate', handleRoute);
+    };
+  }, [setActiveView]);
+
   const portDetails = {
     eth: {
       title: 'Dual Gigabit Ethernet with TSN',
@@ -397,7 +420,10 @@ export default function App() {
                 Admin dashboard analytics and full hardware CRUD tables are scheduled in Phases 5 and 6.
               </p>
               <button
-                onClick={() => setActiveView('landing')}
+                onClick={() => {
+                  window.location.hash = '';
+                  setActiveView('landing');
+                }}
                 className="px-4 py-2 rounded bg-bg-main border border-border-subtle text-xs font-mono text-white hover:border-accent-amber"
               >
                 Return to Hardware Catalog
