@@ -41,10 +41,10 @@ export default function MetricsBar() {
           {hardwareSpecs.map((spec) => (
             <div
               key={spec.title}
-              className="p-5 rounded-lg bg-bg-card border border-border-subtle flex flex-col justify-between hover:border-white/20 transition-colors"
+              className="p-5 rounded-xl bg-slate-50 border border-border-subtle flex flex-col justify-between hover:border-slate-300 hover:bg-white shadow-xs hover:shadow-sm transition-all"
             >
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-text-muted">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-text-muted font-medium">
                   {spec.title}
                 </span>
                 <div className="font-mono font-bold text-xl sm:text-2xl text-text-primary mt-1.5 mb-1.5">
@@ -62,14 +62,14 @@ export default function MetricsBar() {
         <div className="pt-6 border-t border-border-subtle flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="text-xs font-mono text-text-muted flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-accent-amber"></span>
-            <span>SUPPORTED INDUSTRIAL PROTOCOLS:</span>
+            <span className="font-semibold">SUPPORTED INDUSTRIAL PROTOCOLS:</span>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
             {supportedProtocols.map((protocol) => (
               <span
                 key={protocol}
-                className="px-2.5 py-1 rounded bg-bg-card border border-border-subtle text-xs font-mono text-text-secondary hover:text-text-primary transition-colors"
+                className="px-2.5 py-1 rounded-md bg-white border border-border-subtle text-xs font-mono text-text-secondary hover:text-text-primary hover:border-slate-400 transition-colors shadow-2xs"
               >
                 {protocol}
               </span>

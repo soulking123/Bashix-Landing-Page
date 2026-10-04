@@ -25,7 +25,7 @@ export default function CanvasBg() {
       ctx.clearRect(0, 0, width, height);
 
       const gridSize = 40;
-      ctx.strokeStyle = 'rgba(45, 53, 69, 0.4)';
+      ctx.strokeStyle = 'rgba(226, 232, 240, 0.7)';
       ctx.lineWidth = 1;
 
       // Draw faint technical grid lines
@@ -42,7 +42,7 @@ export default function CanvasBg() {
 
       // Precision titanium crosshair marks
       const majorStep = gridSize * 5;
-      ctx.strokeStyle = 'rgba(226, 232, 240, 0.2)';
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.5)';
       ctx.lineWidth = 1;
       const arm = 3.5;
 

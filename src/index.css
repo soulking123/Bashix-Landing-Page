@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  /* Surfaces & Backgrounds - Cinematic Dusk & Industrial Monolith */
-  --color-bg-main: #0B0D11;
-  --color-bg-card: #141820;
-  --color-bg-card-hover: #1C222E;
-  --color-bg-admin: #0E1117;
-  --color-border-subtle: #27303E;
-  --color-border-focus: #F59E0B;
+  /* Surfaces & Backgrounds - Clean Architectural Light & Industrial Studio */
+  --color-bg-main: #FFFFFF;
+  --color-bg-card: #FFFFFF;
+  --color-bg-card-hover: #F8F9FA;
+  --color-bg-admin: #F8F9FA;
+  --color-border-subtle: #E2E8F0;
+  --color-border-focus: #0F172A;
 
-  /* Functional Accents - Warm Dusk Amber, Sunset Crimson & Power Green */
-  --color-accent-primary: #FFFFFF;
-  --color-accent-amber: #F59E0B;     /* Telemetry Amber */
-  --color-accent-sunset: #D94826;    /* Crimson Sunset */
-  --color-accent-emerald: #10B981;   /* Live / In-Stock */
-  --color-accent-rose: #EF4444;      /* Fault Indicator */
+  /* Functional Accents - High Contrast Industrial Slate, Amber & Emerald */
+  --color-accent-primary: #0F172A;
+  --color-accent-amber: #D97706;     /* Telemetry Amber */
+  --color-accent-sunset: #EA580C;    /* Industrial Orange */
+  --color-accent-emerald: #059669;   /* Live / In-Stock */
+  --color-accent-rose: #DC2626;      /* Fault Indicator */
 
-  /* High-Contrast Typography */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #CBD5E1;
-  --color-text-muted: #78889B;
+  /* High-Contrast Typography for Light Mode */
+  --color-text-primary: #0F172A;     /* Deep slate / near black */
+  --color-text-secondary: #475569;   /* Crisp mid-slate */
+  --color-text-muted: #64748B;       /* Technical caption slate */
 
   /* Font Families */
   --font-heading: 'Space Grotesk', sans-serif;
@@ -29,56 +29,61 @@
 
 /* Base resets */
 html {
-  color-scheme: dark;
-  background-color: #0B0D11;
+  color-scheme: light;
+  background-color: #FFFFFF;
+  color: #0F172A;
 }
 
-/* Engineered scrollbar */
+/* Engineered scrollbar for light theme */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B0D11;
+  background: #F8F9FA;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27303E;
+  background: #CBD5E1;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #415066;
+  background: #94A3B8;
 }
 
 /* Tactile focus ring utility */
 :focus-visible {
-  outline: 2px solid #F59E0B;
+  outline: 2px solid #0F172A;
   outline-offset: 2px;
 }
 
-/* Industrial Card */
+/* Industrial Card - Clean White Architectural Card */
 .industrial-card {
-  background-color: #141820;
-  border: 1px solid #27303E;
-  border-radius: 8px;
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .industrial-card:hover {
-  border-color: #3E4D63;
+  border-color: #CBD5E1;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 }
 
-/* Frosted Command Pill (from antislop reference) */
+/* Frosted Command Pill (Light Mode DJI / Bambu Style) */
 .frosted-pill {
-  background: rgba(15, 20, 28, 0.45);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  color: #0F172A;
 }
 
 .frosted-pill:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(15, 20, 28, 0.6);
+  border-color: rgba(15, 23, 42, 0.25);
+  background: rgba(255, 255, 255, 0.98);
 }

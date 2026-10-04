@@ -16,16 +16,17 @@
 
 ---
 
-## 3. Color Palette: Cinematic Dusk & Industrial Monolith
-- **Background Primary:** `#0B0D11` (Deep dusk charcoal carbon)
-- **Surface Panels:** `#141820` (Machined titanium dark card surface)
-- **Surface Raised / Active:** `#1C222E` (Interactive card hover & active tabs)
-- **Borders:** `#27303E` (Crisp structural hairline borders)
-- **Border Active:** `#D94826` / `#F59E0B` (Warm dusk amber & forge accents)
-- **Text Primary:** `#FFFFFF` (Crisp white over cinematic backdrop)
-- **Text Secondary:** `#CBD5E1` (Legible silver slate)
-- **Text Muted:** `#78889B` (Technical annotations and metadata)
-- **Hero Artwork:** Full-bleed cinematic painting of a heavy industrial telemetry installation on a mountain peak at crimson dusk (`/images/bashix-hero.jpg`).
+## 3. Color Palette: Clean Architectural White & Industrial Studio (Bambu Lab & DJI Standard)
+- **Background Primary:** `#FFFFFF` (Pure crisp white background)
+- **Surface Panels:** `#FFFFFF` (Architectural white cards with subtle shadow and hairline border)
+- **Surface Secondary / Raised:** `#F8F9FA` & `#F1F5F9` (Subtle light slate interactive hover & container backgrounds)
+- **Borders:** `#E2E8F0` (Crisp structural hairline slate border)
+- **Border Active / Focus:** `#0F172A` / `#D97706` (Deep charcoal & telemetry amber)
+- **Text Primary:** `#0F172A` (High-contrast deep slate / near black)
+- **Text Secondary:** `#475569` (Legible mid-tone technical slate)
+- **Text Muted:** `#64748B` (Technical annotations, SKUs and metadata)
+- **Primary CTA Buttons:** `#0F172A` (Deep solid charcoal/black with white text, matching DJI/Apple/Bambu standard)
+- **Hero Artwork:** Full-bleed bright daylight architectural showroom with precision robotic hardware (`/images/bashix-hero-light.jpg`).
 - **Pricing Currency:** 100% Indonesian Rupiah (IDR / Rp) exclusively. No USD currency toggle.
 
 ---
