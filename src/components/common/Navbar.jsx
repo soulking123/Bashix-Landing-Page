@@ -6,9 +6,7 @@ export default function Navbar() {
     activeView,
     setActiveView,
     cartItemCount,
-    setIsCartOpen,
-    currency,
-    setCurrency
+    setIsCartOpen
   } = useStore();
 
   const [scrolled, setScrolled] = useState(false);
@@ -77,32 +75,6 @@ export default function Navbar() {
 
           {/* Right Actions */}
           <div className="hidden sm:flex items-center gap-3">
-            {/* Currency Selector */}
-            <div className="flex items-center bg-black/40 backdrop-blur-md border border-white/10 rounded-full p-0.5 text-xs font-mono">
-              <button
-                onClick={() => setCurrency('IDR')}
-                className={`px-2.5 py-1 rounded-full transition-colors ${
-                  currency === 'IDR'
-                    ? 'bg-white/20 text-white font-bold'
-                    : 'text-white/60 hover:text-white'
-                }`}
-                title="Display prices in Indonesian Rupiah"
-              >
-                IDR
-              </button>
-              <button
-                onClick={() => setCurrency('USD')}
-                className={`px-2.5 py-1 rounded-full transition-colors ${
-                  currency === 'USD'
-                    ? 'bg-white/20 text-white font-bold'
-                    : 'text-white/60 hover:text-white'
-                }`}
-                title="Display prices in US Dollars"
-              >
-                USD
-              </button>
-            </div>
-
             {/* Shopping Cart Button */}
             <button
               onClick={() => setIsCartOpen(true)}
@@ -176,21 +148,7 @@ export default function Navbar() {
             </a>
           ))}
           <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-1 font-mono text-xs">
-              <span className="text-white/50 mr-1">Currency:</span>
-              <button
-                onClick={() => setCurrency('IDR')}
-                className={`px-2 py-0.5 rounded ${currency === 'IDR' ? 'bg-white/20 text-white font-bold' : 'text-white/60'}`}
-              >
-                IDR
-              </button>
-              <button
-                onClick={() => setCurrency('USD')}
-                className={`px-2 py-0.5 rounded ${currency === 'USD' ? 'bg-white/20 text-white font-bold' : 'text-white/60'}`}
-              >
-                USD
-              </button>
-            </div>
+            <span className="text-xs font-mono text-white/50">All prices in IDR (Rp)</span>
             <button
               onClick={() => {
                 setActiveView(activeView === 'admin' ? 'landing' : 'admin');

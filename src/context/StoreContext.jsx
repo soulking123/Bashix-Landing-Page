@@ -8,7 +8,6 @@ const StoreContext = createContext(null);
 export const StoreProvider = ({ children }) => {
   const [products, setProducts] = useState(initialProducts);
   const [siteConfig, setSiteConfig] = useState(initialConfig);
-  const [currency, setCurrency] = useState('IDR'); // 'IDR' or 'USD'
   const [activeView, setActiveView] = useState('landing'); // 'landing', 'store', 'admin'
   const [cart, setCart] = useState(() => {
     try {
@@ -35,9 +34,6 @@ export const StoreProvider = ({ children }) => {
         }
         if (loadedConfig) {
           setSiteConfig(loadedConfig);
-          if (loadedConfig.default_currency) {
-            setCurrency(loadedConfig.default_currency);
-          }
         }
       } catch (err) {
         console.error('Failed to initialize store data:', err);
@@ -91,9 +87,10 @@ export const StoreProvider = ({ children }) => {
 
   const clearCart = () => setCart([]);
 
+  const currency = 'IDR';
+
   const cartTotal = cart.reduce((sum, item) => {
-    const price = currency === 'USD' ? item.product.price_usd : item.product.price_idr;
-    return sum + (price * item.quantity);
+    return sum + (item.product.price_idr * item.quantity);
   }, 0);
 
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -125,9 +122,6 @@ export const StoreProvider = ({ children }) => {
   const updateSettings = async (newConfig) => {
     const updated = await db.settings.update(newConfig);
     setSiteConfig(updated);
-    if (updated.default_currency) {
-      setCurrency(updated.default_currency);
-    }
     return updated;
   };
 
@@ -137,7 +131,6 @@ export const StoreProvider = ({ children }) => {
         products,
         siteConfig,
         currency,
-        setCurrency,
         activeView,
         setActiveView,
         cart,

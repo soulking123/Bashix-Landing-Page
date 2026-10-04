@@ -8,7 +8,6 @@ import MetricsBar from './components/landing/MetricsBar';
 export default function App() {
   const {
     products,
-    currency,
     activeView,
     setActiveView,
     isSupabaseLive,
@@ -275,7 +274,7 @@ export default function App() {
                       <div>
                         <div className="text-[10px] font-mono text-text-muted uppercase">Unit Price</div>
                         <div className="font-mono font-bold text-base text-white">
-                          {currency === 'USD' ? `$${item.price_usd}` : `Rp ${item.price_idr.toLocaleString()}`}
+                          Rp {item.price_idr.toLocaleString('id-ID')}
                         </div>
                       </div>
 
@@ -445,7 +444,7 @@ export default function App() {
                           <div className="text-xs font-mono text-accent-amber">{item.product.sku}</div>
                           <div className="font-heading font-semibold text-sm text-white">{item.product.name}</div>
                           <div className="text-xs font-mono text-text-muted">
-                            {currency === 'USD' ? `$${item.product.price_usd}` : `Rp ${item.product.price_idr.toLocaleString()}`}
+                            Rp {item.product.price_idr.toLocaleString('id-ID')}
                           </div>
                         </div>
 
@@ -482,7 +481,7 @@ export default function App() {
                   <div className="flex items-center justify-between text-sm font-mono mb-4">
                     <span className="text-text-muted">Estimated Total:</span>
                     <span className="font-bold text-white text-base">
-                      {currency === 'USD' ? `$${cartTotal}` : `Rp ${cartTotal.toLocaleString()}`}
+                      Rp {cartTotal.toLocaleString('id-ID')}
                     </span>
                   </div>
 

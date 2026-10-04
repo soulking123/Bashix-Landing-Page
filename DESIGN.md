@@ -26,6 +26,7 @@
 - **Text Secondary:** `#CBD5E1` (Legible silver slate)
 - **Text Muted:** `#78889B` (Technical annotations and metadata)
 - **Hero Artwork:** Full-bleed cinematic painting of a heavy industrial telemetry installation on a mountain peak at crimson dusk (`/images/bashix-hero.jpg`).
+- **Pricing Currency:** 100% Indonesian Rupiah (IDR / Rp) exclusively. No USD currency toggle.
 
 ---
 
