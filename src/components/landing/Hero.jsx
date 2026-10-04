@@ -60,7 +60,8 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Clear Value Proposition */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
-            <div className="text-xs font-mono uppercase tracking-wider text-accent-primary font-semibold mb-3">
+            <div className="text-xs font-mono uppercase tracking-wider text-accent-amber font-semibold mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-amber"></span>
               Jakarta, Indonesia // Hardware Engineering
             </div>
 
@@ -77,7 +78,7 @@ export default function Hero() {
               <a
                 href="#catalog"
                 onClick={() => setActiveView('landing')}
-                className="px-6 py-3 rounded-lg text-sm font-semibold bg-accent-primary text-white hover:bg-sky-600 transition-colors focus-visible:ring-2 focus-visible:ring-accent-primary"
+                className="px-6 py-3 rounded text-sm font-semibold bg-text-primary text-bg-main hover:bg-accent-steel transition-colors focus-visible:ring-2 focus-visible:ring-accent-amber shadow-sm"
               >
                 Browse Hardware Catalog
               </a>
@@ -85,14 +86,14 @@ export default function Hero() {
               <a
                 href="#schematic"
                 onClick={() => setActiveView('landing')}
-                className="px-6 py-3 rounded-lg text-sm font-semibold bg-bg-card border border-border-subtle text-text-primary hover:border-border-subtle/80 hover:bg-bg-card-hover transition-colors focus-visible:ring-2 focus-visible:ring-accent-primary"
+                className="px-6 py-3 rounded text-sm font-semibold bg-bg-card border border-border-subtle text-text-primary hover:border-text-secondary hover:bg-bg-card-hover transition-colors focus-visible:ring-2 focus-visible:ring-accent-amber"
               >
                 View Interface Architecture
               </a>
             </div>
 
             {/* Hardware Delivery Notice */}
-            <div className="mt-8 pt-6 border-t border-border-subtle/60 w-full flex items-center gap-4 text-xs font-mono text-text-muted">
+            <div className="mt-8 pt-6 border-t border-border-subtle/80 w-full flex items-center gap-4 text-xs font-mono text-text-muted">
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-accent-emerald"></span>
                 Units in stock for dispatch
@@ -107,7 +108,7 @@ export default function Hero() {
             <div className="industrial-card p-6 shadow-xl">
               <div className="flex items-center justify-between pb-4 mb-4 border-b border-border-subtle">
                 <div className="flex items-center gap-2 font-mono text-xs text-text-primary">
-                  <span className="font-bold text-accent-primary">MODEL:</span>
+                  <span className="font-bold text-accent-amber">MODEL:</span>
                   <span>BX-GW-02 // EdgeCore v2</span>
                 </div>
                 <div className="text-[11px] font-mono px-2 py-0.5 rounded bg-bg-main border border-border-subtle text-text-muted">
@@ -121,8 +122,8 @@ export default function Hero() {
                   onClick={() => setActivePort('eth')}
                   className={`px-3 py-2 rounded text-xs font-mono text-left transition-colors border ${
                     activePort === 'eth'
-                      ? 'bg-accent-primary text-white border-accent-primary font-bold'
-                      : 'bg-bg-main text-text-secondary border-border-subtle hover:text-text-primary'
+                      ? 'bg-bg-main text-text-primary border-accent-amber font-bold'
+                      : 'bg-bg-card text-text-secondary border-border-subtle hover:text-text-primary'
                   }`}
                 >
                   Dual GbE TSN
@@ -131,8 +132,8 @@ export default function Hero() {
                   onClick={() => setActivePort('rs485')}
                   className={`px-3 py-2 rounded text-xs font-mono text-left transition-colors border ${
                     activePort === 'rs485'
-                      ? 'bg-accent-primary text-white border-accent-primary font-bold'
-                      : 'bg-bg-main text-text-secondary border-border-subtle hover:text-text-primary'
+                      ? 'bg-bg-main text-text-primary border-accent-amber font-bold'
+                      : 'bg-bg-card text-text-secondary border-border-subtle hover:text-text-primary'
                   }`}
                 >
                   Isolated RS-485
@@ -141,8 +142,8 @@ export default function Hero() {
                   onClick={() => setActivePort('can')}
                   className={`px-3 py-2 rounded text-xs font-mono text-left transition-colors border ${
                     activePort === 'can'
-                      ? 'bg-accent-primary text-white border-accent-primary font-bold'
-                      : 'bg-bg-main text-text-secondary border-border-subtle hover:text-text-primary'
+                      ? 'bg-bg-main text-text-primary border-accent-amber font-bold'
+                      : 'bg-bg-card text-text-secondary border-border-subtle hover:text-text-primary'
                   }`}
                 >
                   Dual CAN-FD
@@ -151,8 +152,8 @@ export default function Hero() {
                   onClick={() => setActivePort('power')}
                   className={`px-3 py-2 rounded text-xs font-mono text-left transition-colors border ${
                     activePort === 'power'
-                      ? 'bg-accent-primary text-white border-accent-primary font-bold'
-                      : 'bg-bg-main text-text-secondary border-border-subtle hover:text-text-primary'
+                      ? 'bg-bg-main text-text-primary border-accent-amber font-bold'
+                      : 'bg-bg-card text-text-secondary border-border-subtle hover:text-text-primary'
                   }`}
                 >
                   9-36V DC Power
@@ -160,12 +161,12 @@ export default function Hero() {
               </div>
 
               {/* Selected Port Specifications Display */}
-              <div className="bg-bg-main p-5 rounded-lg border border-border-subtle">
+              <div className="bg-bg-main p-5 rounded border border-border-subtle">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-heading font-bold text-base text-text-primary">
                     {selected.title}
                   </h3>
-                  <span className="text-[11px] font-mono text-accent-primary">
+                  <span className="text-[11px] font-mono text-accent-amber">
                     {selected.spec}
                   </span>
                 </div>
@@ -177,7 +178,7 @@ export default function Hero() {
                 <div className="space-y-2">
                   {selected.features.map((feature, idx) => (
                     <div key={idx} className="flex items-start gap-2 text-xs font-mono text-text-secondary">
-                      <span className="text-accent-primary font-bold">›</span>
+                      <span className="text-accent-amber font-bold">›</span>
                       <span>{feature}</span>
                     </div>
                   ))}

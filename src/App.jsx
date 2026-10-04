@@ -32,7 +32,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-bg-main text-text-primary font-sans relative selection:bg-accent-primary/20 selection:text-accent-primary">
+    <div className="min-h-screen bg-bg-main text-text-primary font-sans relative selection:bg-border-subtle selection:text-text-primary">
       {/* Subtle CAD / Technical Blueprint Grid */}
       <CanvasBg />
 
@@ -53,8 +53,8 @@ export default function App() {
             <section id="catalog" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-border-subtle">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
                 <div>
-                  <span className="text-xs font-mono text-accent-primary font-semibold uppercase tracking-wider block mb-1">
-                    Off-the-Shelf & Custom Order
+                  <span className="text-xs font-mono text-accent-amber font-semibold uppercase tracking-wider block mb-1">
+                    Direct Factory Inventory
                   </span>
                   <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-text-primary">
                     Physical Hardware Catalog
@@ -76,10 +76,11 @@ export default function App() {
                     <div>
                       {/* Product Header & SKU */}
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="text-xs font-mono px-2 py-0.5 rounded bg-bg-main border border-border-subtle text-accent-primary font-semibold">
+                        <span className="text-xs font-mono px-2 py-0.5 rounded bg-bg-main border border-border-subtle text-text-primary font-semibold">
                           {item.sku}
                         </span>
-                        <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-bg-main border border-border-subtle text-accent-emerald">
+                        <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-bg-main border border-border-subtle text-accent-emerald flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald"></span>
                           {item.stock_qty} in stock
                         </span>
                       </div>
@@ -97,10 +98,10 @@ export default function App() {
                       </p>
 
                       {/* Hardware Specification List */}
-                      <div className="space-y-1.5 mb-6 pt-3 border-t border-border-subtle/60">
+                      <div className="space-y-1.5 mb-6 pt-3 border-t border-border-subtle/80">
                         {item.specs.slice(0, 3).map((spec, i) => (
                           <div key={i} className="flex items-start gap-1.5 text-xs font-mono text-text-secondary">
-                            <span className="text-accent-primary font-bold">›</span>
+                            <span className="text-accent-amber font-bold">›</span>
                             <span className="line-clamp-1">{spec}</span>
                           </div>
                         ))}
@@ -118,7 +119,7 @@ export default function App() {
 
                       <button
                         onClick={() => addToCart(item, 1)}
-                        className="px-3.5 py-2 rounded text-xs font-semibold bg-accent-primary text-white hover:bg-sky-600 transition-colors focus-visible:ring-2 focus-visible:ring-accent-primary"
+                        className="px-3.5 py-2 rounded text-xs font-semibold bg-accent-steel text-bg-main hover:bg-white transition-colors focus-visible:ring-2 focus-visible:ring-accent-amber"
                         aria-label={`Add ${item.name} to cart`}
                       >
                         Add to Cart
@@ -134,7 +135,7 @@ export default function App() {
               <div className="industrial-card p-8 md:p-12">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                   <div className="lg:col-span-7">
-                    <span className="text-xs font-mono text-accent-primary font-semibold uppercase tracking-wider block mb-2">
+                    <span className="text-xs font-mono text-accent-amber font-semibold uppercase tracking-wider block mb-2">
                       Direct Engineering Inquiries
                     </span>
                     <h2 className="font-heading text-3xl font-extrabold text-text-primary mb-4">
@@ -151,7 +152,7 @@ export default function App() {
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="w-20 text-text-muted">Email:</span>
-                        <a href="mailto:engineering@bashix.id" className="text-accent-primary hover:underline">
+                        <a href="mailto:engineering@bashix.id" className="text-text-primary underline hover:text-accent-amber">
                           engineering@bashix.id
                         </a>
                       </div>
@@ -165,7 +166,7 @@ export default function App() {
                   </div>
 
                   {/* Consultation Request Form */}
-                  <div className="lg:col-span-5 bg-bg-main p-6 rounded-lg border border-border-subtle">
+                  <div className="lg:col-span-5 bg-bg-main p-6 rounded border border-border-subtle">
                     <h3 className="font-heading font-bold text-base text-text-primary mb-1">
                       Request Hardware Briefing
                     </h3>
@@ -186,7 +187,7 @@ export default function App() {
                           type="text"
                           required
                           placeholder="e.g. Budi Santoso"
-                          className="w-full px-3 py-2 rounded bg-bg-card border border-border-subtle text-xs text-text-primary focus:border-accent-primary focus:outline-none"
+                          className="w-full px-3 py-2 rounded bg-bg-card border border-border-subtle text-xs text-text-primary focus:border-accent-amber focus:outline-none"
                         />
                       </div>
                       <div>
@@ -195,7 +196,7 @@ export default function App() {
                           type="email"
                           required
                           placeholder="name@company.com"
-                          className="w-full px-3 py-2 rounded bg-bg-card border border-border-subtle text-xs text-text-primary focus:border-accent-primary focus:outline-none"
+                          className="w-full px-3 py-2 rounded bg-bg-card border border-border-subtle text-xs text-text-primary focus:border-accent-amber focus:outline-none"
                         />
                       </div>
                       <div>
@@ -204,12 +205,12 @@ export default function App() {
                           rows="3"
                           required
                           placeholder="Specify unit models, quantities, or custom I/O specifications..."
-                          className="w-full px-3 py-2 rounded bg-bg-card border border-border-subtle text-xs text-text-primary focus:border-accent-primary focus:outline-none resize-none"
+                          className="w-full px-3 py-2 rounded bg-bg-card border border-border-subtle text-xs text-text-primary focus:border-accent-amber focus:outline-none resize-none"
                         ></textarea>
                       </div>
                       <button
                         type="submit"
-                        className="w-full py-2.5 rounded bg-accent-primary hover:bg-sky-600 text-white text-xs font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-accent-primary"
+                        className="w-full py-2.5 rounded bg-text-primary hover:bg-accent-steel text-bg-main text-xs font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-accent-amber font-mono"
                       >
                         Submit Technical Request
                       </button>
@@ -225,7 +226,7 @@ export default function App() {
         {activeView === 'admin' && (
           <div className="pt-28 pb-20 max-w-4xl mx-auto px-4 sm:px-6">
             <div className="industrial-card p-8 text-center flex flex-col items-center gap-4">
-              <span className="text-xs font-mono px-3 py-1 rounded bg-bg-main border border-border-subtle text-accent-primary">
+              <span className="text-xs font-mono px-3 py-1 rounded bg-bg-main border border-border-subtle text-accent-amber">
                 Management Portal
               </span>
               <h2 className="font-heading text-2xl font-bold text-text-primary">
@@ -236,7 +237,7 @@ export default function App() {
               </p>
               <button
                 onClick={() => setActiveView('landing')}
-                className="px-4 py-2 rounded bg-bg-main border border-border-subtle text-xs font-mono text-text-primary hover:border-accent-primary"
+                className="px-4 py-2 rounded bg-bg-main border border-border-subtle text-xs font-mono text-text-primary hover:border-accent-amber"
               >
                 Return to Hardware Catalog
               </button>
@@ -249,7 +250,7 @@ export default function App() {
       {isCartOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden" role="dialog" aria-modal="true">
           <div
-            className="absolute inset-0 bg-black/70 transition-opacity"
+            className="absolute inset-0 bg-black/75 transition-opacity"
             onClick={() => setIsCartOpen(false)}
           ></div>
 
@@ -279,7 +280,7 @@ export default function App() {
                     cart.map((item) => (
                       <div key={item.product.id} className="p-3 rounded bg-bg-main border border-border-subtle flex items-center justify-between gap-4">
                         <div>
-                          <div className="text-xs font-mono text-accent-primary">{item.product.sku}</div>
+                          <div className="text-xs font-mono text-accent-amber">{item.product.sku}</div>
                           <div className="font-heading font-semibold text-sm text-text-primary">{item.product.name}</div>
                           <div className="text-xs font-mono text-text-muted">
                             {currency === 'USD' ? `$${item.product.price_usd}` : `Rp ${item.product.price_idr.toLocaleString()}`}
@@ -330,7 +331,7 @@ export default function App() {
                   ) : (
                     <button
                       onClick={handleSimulatedCheckout}
-                      className="w-full py-3 rounded bg-accent-primary hover:bg-sky-600 text-white text-xs font-semibold font-mono transition-colors"
+                      className="w-full py-3 rounded bg-accent-steel hover:bg-white text-bg-main text-xs font-semibold font-mono transition-colors"
                     >
                       Proceed to Order Dispatch
                     </button>

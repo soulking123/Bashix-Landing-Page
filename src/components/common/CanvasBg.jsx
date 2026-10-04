@@ -24,8 +24,8 @@ export default function CanvasBg() {
     const drawGrid = () => {
       ctx.clearRect(0, 0, width, height);
 
-      const gridSize = 48;
-      ctx.strokeStyle = 'rgba(38, 50, 69, 0.45)';
+      const gridSize = 40;
+      ctx.strokeStyle = 'rgba(45, 53, 69, 0.4)';
       ctx.lineWidth = 1;
 
       // Draw faint technical grid lines
@@ -40,11 +40,11 @@ export default function CanvasBg() {
       }
       ctx.stroke();
 
-      // Draw subtle crosshair markers at major intersections
-      const majorStep = gridSize * 4;
-      ctx.strokeStyle = 'rgba(2, 132, 199, 0.35)';
+      // Precision titanium crosshair marks
+      const majorStep = gridSize * 5;
+      ctx.strokeStyle = 'rgba(226, 232, 240, 0.2)';
       ctx.lineWidth = 1;
-      const arm = 4;
+      const arm = 3.5;
 
       for (let x = majorStep; x < width; x += majorStep) {
         for (let y = majorStep; y < height; y += majorStep) {
@@ -69,7 +69,7 @@ export default function CanvasBg() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-40"
+      className="fixed inset-0 pointer-events-none z-0 opacity-35"
       aria-hidden="true"
     />
   );

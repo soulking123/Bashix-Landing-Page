@@ -34,20 +34,20 @@ export default function MetricsBar() {
   ];
 
   return (
-    <section id="specs" className="py-12 bg-bg-card/50 border-b border-border-subtle">
+    <section id="specs" className="py-12 bg-bg-card/70 border-b border-border-subtle">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Core Hardware Electrical & Environmental Ratings */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {hardwareSpecs.map((spec) => (
             <div
               key={spec.title}
-              className="p-4 rounded-lg bg-bg-main border border-border-subtle flex flex-col justify-between"
+              className="p-5 rounded bg-bg-main border border-border-subtle flex flex-col justify-between"
             >
               <div>
                 <span className="text-[11px] font-mono uppercase tracking-wider text-text-muted">
                   {spec.title}
                 </span>
-                <div className="font-mono font-bold text-xl sm:text-2xl text-text-primary mt-1 mb-1">
+                <div className="font-mono font-bold text-xl sm:text-2xl text-text-primary mt-1.5 mb-1.5">
                   {spec.value}
                 </div>
               </div>
@@ -59,9 +59,9 @@ export default function MetricsBar() {
         </div>
 
         {/* Verified Protocols Row */}
-        <div className="pt-6 border-t border-border-subtle/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div className="pt-6 border-t border-border-subtle/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="text-xs font-mono text-text-muted flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-accent-primary"></span>
+            <span className="w-2 h-2 rounded-full bg-accent-amber"></span>
             <span>SUPPORTED INDUSTRIAL PROTOCOLS:</span>
           </div>
 
@@ -69,7 +69,7 @@ export default function MetricsBar() {
             {supportedProtocols.map((protocol) => (
               <span
                 key={protocol}
-                className="px-2.5 py-1 rounded bg-bg-main border border-border-subtle text-xs font-mono text-text-secondary"
+                className="px-2.5 py-1 rounded bg-bg-main border border-border-subtle text-xs font-mono text-text-secondary hover:text-text-primary hover:border-text-secondary transition-colors"
               >
                 {protocol}
               </span>
