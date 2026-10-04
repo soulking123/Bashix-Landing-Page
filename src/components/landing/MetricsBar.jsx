@@ -1,85 +1,78 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 
 export default function MetricsBar() {
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+  const hardwareSpecs = [
+    {
+      title: 'Operating Temperature',
+      value: '-40°C to +85°C',
+      detail: 'Industrial grade fanless passive thermal dissipation'
+    },
+    {
+      title: 'Supply Voltage',
+      value: '9V to 36V DC',
+      detail: 'Wide-tolerance input with reverse polarity protection'
+    },
+    {
+      title: 'Enclosure Standard',
+      value: 'DIN Rail 35mm',
+      detail: 'EN 50022 standard anodized aluminum chassis'
+    },
+    {
+      title: 'Compute Architecture',
+      value: '64-bit Quad RISC-V',
+      detail: '1.8 GHz with dedicated hardware watchdog timer'
     }
-
-    return () => observer.disconnect();
-  }, [hasAnimated]);
-
-  const metrics = [
-    { value: '99.999%', label: 'Mission-Critical SLA Target', sub: 'Zero unplanned downtime' },
-    { value: '< 4.8ms', label: 'P99 Edge Latency', sub: 'Sub-millisecond jitter' },
-    { value: '12,400+', label: 'Hardware Units Deployed', sub: 'Field-tested worldwide' },
-    { value: '10M+', label: 'Daily Telemetry Packets', sub: 'Real-time telemetry stream' }
   ];
 
-  const ecosystemPartners = [
-    { name: 'RISC-V Alliance', tag: 'Native Silicon' },
-    { name: 'Linux Foundation', tag: 'PREEMPT_RT' },
-    { name: 'eBPF Project', tag: 'Zero-Copy Filter' },
-    { name: 'LoRaWAN Member', tag: 'Sub-GHz Mesh' },
-    { name: 'PCI-SIG', tag: 'Deterministic PCIe' },
-    { name: 'ISO 26262', tag: 'Automotive Ready' }
+  const supportedProtocols = [
+    'Modbus RTU / TCP',
+    'CAN 2.0B & CAN-FD',
+    'MQTT / Sparkplug B',
+    'Linux SocketCAN',
+    'LoRaWAN 868 / 915 MHz',
+    'IEEE 802.1Qbv TSN'
   ];
 
   return (
-    <section ref={containerRef} className="py-12 border-y border-white/10 bg-bg-card/40 relative z-10">
+    <section id="specs" className="py-12 bg-bg-card/50 border-b border-border-subtle">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Real-time Telemetry Metrics Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          {metrics.map((item, index) => (
+        {/* Core Hardware Electrical & Environmental Ratings */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {hardwareSpecs.map((spec) => (
             <div
-              key={item.label}
-              className={`flex flex-col items-center sm:items-start text-center sm:text-left transition-all duration-700 ${
-                hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
-              style={{ transitionDelay: `${index * 120}ms` }}
+              key={spec.title}
+              className="p-4 rounded-lg bg-bg-main border border-border-subtle flex flex-col justify-between"
             >
-              <div className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-1 text-gradient-cyan">
-                {item.value}
+              <div>
+                <span className="text-[11px] font-mono uppercase tracking-wider text-text-muted">
+                  {spec.title}
+                </span>
+                <div className="font-mono font-bold text-xl sm:text-2xl text-text-primary mt-1 mb-1">
+                  {spec.value}
+                </div>
               </div>
-              <div className="text-xs sm:text-sm font-semibold text-text-primary tracking-wide">
-                {item.label}
-              </div>
-              <div className="text-[11px] font-mono text-text-muted mt-0.5">
-                {item.sub}
-              </div>
+              <p className="text-xs text-text-secondary leading-normal">
+                {spec.detail}
+              </p>
             </div>
           ))}
         </div>
 
-        {/* Enterprise Standards & Technical Ecosystem Ticker */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2 text-xs font-mono text-text-muted shrink-0">
-            <span className="w-2 h-2 rounded-full bg-accent-cyan"></span>
-            <span>ENGINEERED TO INDUSTRY SPECIFICATIONS</span>
+        {/* Verified Protocols Row */}
+        <div className="pt-6 border-t border-border-subtle/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="text-xs font-mono text-text-muted flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-accent-primary"></span>
+            <span>SUPPORTED INDUSTRIAL PROTOCOLS:</span>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            {ecosystemPartners.map((partner) => (
-              <div
-                key={partner.name}
-                className="px-3 py-1.5 rounded-lg bg-bg-card/80 border border-white/10 text-xs font-mono text-text-secondary hover:text-white hover:border-accent-cyan/40 hover:bg-bg-card transition-all flex items-center gap-2 group cursor-default"
+          <div className="flex flex-wrap items-center gap-2">
+            {supportedProtocols.map((protocol) => (
+              <span
+                key={protocol}
+                className="px-2.5 py-1 rounded bg-bg-main border border-border-subtle text-xs font-mono text-text-secondary"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-text-muted group-hover:bg-accent-cyan transition-colors"></span>
-                <span className="font-semibold text-text-primary">{partner.name}</span>
-                <span className="text-[10px] text-text-muted">({partner.tag})</span>
-              </div>
+                {protocol}
+              </span>
             ))}
           </div>
         </div>

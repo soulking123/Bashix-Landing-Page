@@ -23,84 +23,77 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: 'Services', href: '#services', view: 'landing' },
-    { label: 'Hardware Store', href: '#shop', view: 'landing' },
-    { label: 'Architecture', href: '#architecture', view: 'landing' },
-    { label: 'Case Studies', href: '#case-studies', view: 'landing' },
-    { label: 'Scope Estimator', href: '#estimator', view: 'landing' }
+    { label: 'Hardware Catalog', href: '#catalog' },
+    { label: 'I/O & Architecture', href: '#schematic' },
+    { label: 'Technical Specifications', href: '#specs' },
+    { label: 'Contact Office', href: '#contact' }
   ];
 
-  const handleNavClick = (link) => {
-    if (activeView !== link.view) {
-      setActiveView(link.view);
+  const handleNavClick = () => {
+    if (activeView !== 'landing') {
+      setActiveView('landing');
     }
     setMobileMenuOpen(false);
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${
         scrolled
-          ? 'bg-bg-main/80 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/40 py-3.5'
-          : 'bg-transparent border-b border-transparent py-5'
+          ? 'bg-bg-main/95 border-b border-border-subtle shadow-md py-3'
+          : 'bg-bg-main/80 border-b border-border-subtle/40 py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo / Brand Name */}
           <a
             href="#"
             onClick={() => setActiveView('landing')}
-            className="flex items-center gap-3 group focus:outline-none"
+            className="flex items-center gap-3 focus-visible:ring-2 focus-visible:ring-accent-primary rounded-lg p-1"
           >
-            <div className="relative w-10 h-10 rounded-xl bg-bg-card border border-accent-cyan/40 flex items-center justify-center transition-all duration-300 group-hover:border-accent-cyan group-hover:shadow-[0_0_20px_rgba(0,240,255,0.35)]">
-              {/* Hexagon vector badge */}
-              <svg className="w-5 h-5 text-accent-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-              <div className="absolute inset-0 rounded-xl bg-accent-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="w-8 h-8 rounded bg-bg-card border border-border-subtle flex items-center justify-center text-accent-primary font-mono font-bold text-base">
+              BX
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
-                <span className="font-heading font-extrabold text-xl tracking-wider text-white">
+                <span className="font-heading font-bold text-lg tracking-wide text-text-primary">
                   BASHIX
                 </span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-accent-cyan/15 text-accent-cyan font-bold border border-accent-cyan/30">
-                  .id
-                </span>
+                <span className="text-[11px] font-mono text-text-muted">.id</span>
               </div>
-              <span className="text-[10px] font-mono text-text-muted tracking-tight">
-                SYSTEMS & HARDWARE
+              <span className="text-[10px] font-mono text-text-muted uppercase tracking-wider">
+                Industrial Hardware & Systems
               </span>
             </div>
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-1 bg-bg-card/60 backdrop-blur-md border border-white/10 rounded-full px-4 py-1.5 shadow-inner">
+          <nav className="hidden lg:flex items-center gap-6" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                onClick={() => handleNavClick(link)}
-                className="px-3.5 py-1.5 text-xs font-medium text-text-secondary hover:text-white hover:text-accent-cyan transition-colors rounded-full"
+                onClick={handleNavClick}
+                className="text-xs font-medium text-text-secondary hover:text-text-primary transition-colors focus-visible:ring-2 focus-visible:ring-accent-primary rounded px-1 py-0.5"
               >
                 {link.label}
               </a>
             ))}
-          </div>
+          </nav>
 
-          {/* Right Action Icons & Triggers */}
-          <div className="hidden md:flex items-center gap-3">
-            {/* Currency Selector */}
-            <div className="flex items-center bg-bg-card border border-white/10 rounded-lg p-0.5 text-xs font-mono">
+          {/* Right Actions */}
+          <div className="hidden sm:flex items-center gap-3">
+            {/* Currency Switcher */}
+            <div className="flex items-center bg-bg-card border border-border-subtle rounded p-0.5 text-xs font-mono">
               <button
                 onClick={() => setCurrency('IDR')}
                 className={`px-2 py-1 rounded transition-colors ${
                   currency === 'IDR'
-                    ? 'bg-accent-cyan text-bg-main font-bold shadow'
-                    : 'text-text-muted hover:text-white'
+                    ? 'bg-accent-primary text-white font-semibold'
+                    : 'text-text-muted hover:text-text-primary'
                 }`}
-                title="Switch to Indonesian Rupiah"
+                title="Display prices in Indonesian Rupiah"
               >
                 IDR
               </button>
@@ -108,10 +101,10 @@ export default function Navbar() {
                 onClick={() => setCurrency('USD')}
                 className={`px-2 py-1 rounded transition-colors ${
                   currency === 'USD'
-                    ? 'bg-accent-cyan text-bg-main font-bold shadow'
-                    : 'text-text-muted hover:text-white'
+                    ? 'bg-accent-primary text-white font-semibold'
+                    : 'text-text-muted hover:text-text-primary'
                 }`}
-                title="Switch to US Dollar"
+                title="Display prices in US Dollars"
               >
                 USD
               </button>
@@ -120,67 +113,51 @@ export default function Navbar() {
             {/* Shopping Cart Button */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-2.5 rounded-xl bg-bg-card border border-white/10 hover:border-accent-cyan/50 text-text-secondary hover:text-white transition-all focus:outline-none group"
+              className="relative px-3 py-2 rounded bg-bg-card border border-border-subtle hover:border-accent-primary text-xs font-mono text-text-primary transition-colors flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-accent-primary"
               aria-label="Open Shopping Cart"
             >
-              <svg className="w-5 h-5 text-text-secondary group-hover:text-accent-cyan transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-              {cartItemCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 min-w-5 h-5 px-1 bg-accent-cyan text-bg-main text-[11px] font-mono font-bold rounded-full flex items-center justify-center shadow-lg shadow-accent-cyan/40 animate-pulse">
-                  {cartItemCount}
-                </span>
-              )}
+              <span>Cart</span>
+              <span className="px-1.5 py-0.2 rounded bg-border-subtle text-accent-primary font-bold text-[11px]">
+                {cartItemCount}
+              </span>
             </button>
 
-            {/* Admin Portal Toggle Button */}
+            {/* Admin Portal Toggle */}
             <button
               onClick={() => setActiveView(activeView === 'admin' ? 'landing' : 'admin')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-mono font-medium transition-all flex items-center gap-2 border ${
+              className={`px-3 py-2 rounded text-xs font-mono transition-colors border ${
                 activeView === 'admin'
-                  ? 'bg-accent-cyan text-bg-main border-accent-cyan shadow-[0_0_15px_rgba(0,240,255,0.3)] font-bold'
-                  : 'bg-bg-card text-text-secondary border-white/10 hover:border-accent-cyan/40 hover:text-white'
+                  ? 'bg-accent-primary text-white border-accent-primary font-semibold'
+                  : 'bg-bg-card text-text-secondary border-border-subtle hover:text-text-primary hover:border-border-subtle/80'
               }`}
             >
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="3" width="7" height="7" rx="1" />
-                <rect x="14" y="3" width="7" height="7" rx="1" />
-                <rect x="14" y="14" width="7" height="7" rx="1" />
-                <rect x="3" y="14" width="7" height="7" rx="1" />
-              </svg>
-              <span>{activeView === 'admin' ? 'Exit Portal' : 'Admin'}</span>
+              {activeView === 'admin' ? 'Exit Admin' : 'Admin Portal'}
             </button>
 
-            {/* Contact / CTA */}
+            {/* Contact Action */}
             <a
-              href="#estimator"
-              onClick={() => setActiveView('landing')}
-              className="px-4 py-2 rounded-xl text-xs font-semibold font-heading tracking-wide bg-gradient-to-r from-accent-cyan to-accent-violet text-white hover:opacity-90 transition-all shadow-[0_0_20px_rgba(0,240,255,0.25)] hover:shadow-[0_0_25px_rgba(0,240,255,0.45)] transform hover:-translate-y-0.5"
+              href="#contact"
+              onClick={handleNavClick}
+              className="px-3.5 py-2 rounded text-xs font-semibold bg-white text-bg-main hover:bg-slate-200 transition-colors focus-visible:ring-2 focus-visible:ring-accent-primary"
             >
-              Consult Team
+              Contact Sales
             </a>
           </div>
 
-          {/* Mobile Menu Hamburger */}
-          <div className="flex md:hidden items-center gap-2">
+          {/* Mobile Menu Button */}
+          <div className="flex sm:hidden items-center gap-2">
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-2 rounded-lg bg-bg-card border border-white/10 text-text-secondary"
+              className="px-2.5 py-1.5 rounded bg-bg-card border border-border-subtle text-xs font-mono text-text-primary"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-              {cartItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-accent-cyan text-bg-main text-[10px] font-bold rounded-full flex items-center justify-center">
-                  {cartItemCount}
-                </span>
-              )}
+              Cart ({cartItemCount})
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-bg-card border border-white/10 text-text-secondary hover:text-white"
+              className="p-2 rounded bg-bg-card border border-border-subtle text-text-secondary hover:text-text-primary focus-visible:ring-2 focus-visible:ring-accent-primary"
+              aria-label="Toggle Navigation Menu"
             >
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {mobileMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -192,31 +169,31 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Dropdown */}
+      {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden glass-panel border-b border-white/10 px-6 py-6 flex flex-col gap-4 mt-2">
+        <div className="sm:hidden bg-bg-card border-b border-border-subtle px-6 py-4 flex flex-col gap-3 mt-3">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              onClick={() => handleNavClick(link)}
-              className="text-sm font-medium text-text-secondary hover:text-accent-cyan py-1"
+              onClick={handleNavClick}
+              className="text-sm font-medium text-text-secondary hover:text-text-primary py-1"
             >
               {link.label}
             </a>
           ))}
-          <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-2 font-mono text-xs">
-              <span className="text-text-muted">Currency:</span>
+          <div className="pt-3 border-t border-border-subtle flex items-center justify-between">
+            <div className="flex items-center gap-1 font-mono text-xs">
+              <span className="text-text-muted mr-1">Currency:</span>
               <button
                 onClick={() => setCurrency('IDR')}
-                className={`px-2 py-0.5 rounded ${currency === 'IDR' ? 'bg-accent-cyan text-bg-main font-bold' : 'text-text-secondary'}`}
+                className={`px-2 py-0.5 rounded ${currency === 'IDR' ? 'bg-accent-primary text-white font-bold' : 'text-text-secondary'}`}
               >
                 IDR
               </button>
               <button
                 onClick={() => setCurrency('USD')}
-                className={`px-2 py-0.5 rounded ${currency === 'USD' ? 'bg-accent-cyan text-bg-main font-bold' : 'text-text-secondary'}`}
+                className={`px-2 py-0.5 rounded ${currency === 'USD' ? 'bg-accent-primary text-white font-bold' : 'text-text-secondary'}`}
               >
                 USD
               </button>
@@ -226,13 +203,13 @@ export default function Navbar() {
                 setActiveView(activeView === 'admin' ? 'landing' : 'admin');
                 setMobileMenuOpen(false);
               }}
-              className="text-xs font-mono px-3 py-1.5 rounded-lg bg-bg-card border border-white/10 text-accent-cyan"
+              className="text-xs font-mono px-3 py-1 rounded bg-bg-main border border-border-subtle text-accent-primary"
             >
-              {activeView === 'admin' ? 'Exit Portal' : 'Admin Portal'}
+              {activeView === 'admin' ? 'Exit Admin' : 'Admin'}
             </button>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

@@ -3,115 +3,202 @@ import { useStore } from '../../context/StoreContext';
 
 export default function Hero() {
   const { siteConfig, setActiveView } = useStore();
-  const [copied, setCopied] = useState(false);
+  const [activePort, setActivePort] = useState('eth');
 
-  const copyCommand = () => {
-    navigator.clipboard.writeText('curl -sSL https://bashix.id/init.sh | sh');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const portDetails = {
+    eth: {
+      title: 'Dual Gigabit Ethernet with TSN',
+      spec: '2x RJ45 10/100/1000BASE-T',
+      features: [
+        'Hardware IEEE 802.1Qbv Time-Sensitive Networking',
+        'Independent MAC controllers on dedicated PCIe lanes',
+        'Integrated 1.5kV magnetic isolation',
+        'eBPF packet filtering support in kernel space'
+      ],
+      connector: 'Shielded RJ45 8P8C'
+    },
+    rs485: {
+      title: 'Optically Isolated RS-485 / Modbus',
+      spec: '3-Pin Pluggable Screw Terminal',
+      features: [
+        '2.5kV RMS galvanic isolation barrier',
+        'Modbus RTU master/slave baud rates up to 115.2 kbps',
+        'Built-in 15kV ESD surge protection',
+        'Switchable 120 Ohm bi-directional termination resistor'
+      ],
+      connector: 'Phoenix Contact 3.81mm Pitch'
+    },
+    can: {
+      title: 'Dual CAN-FD Telemetry Interface',
+      spec: '2-Channel ISO 11898-1:2015',
+      features: [
+        'Arbitration phase up to 1 Mbps, data phase up to 8 Mbps',
+        'Sub-microsecond hardware message timestamping',
+        'Native Linux SocketCAN kernel driver integration',
+        'Short-circuit to battery protection on CAN_H / CAN_L'
+      ],
+      connector: 'Terminal Block & DB9 Diagnostic Header'
+    },
+    power: {
+      title: 'Wide-Range Industrial Power Supply',
+      spec: '9V to 36V DC Input Range',
+      features: [
+        'Reverse polarity and overvoltage clamp protection',
+        'Integrated hardware watchdog timer with reset latch',
+        'Operating temperature: -40 deg C to +85 deg C',
+        'Standard 35mm DIN rail mounting enclosure (EN 50022)'
+      ],
+      connector: '2-Pin 5.08mm High-Current Screw Terminal'
+    }
   };
 
+  const selected = portDetails[activePort];
+
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden flex flex-col items-center justify-center">
-      {/* Ambient background glow orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-accent-cyan/15 rounded-full blur-[140px] pointer-events-none -z-10"></div>
-      <div className="absolute top-1/3 left-1/3 w-[400px] h-[300px] bg-accent-violet/15 rounded-full blur-[160px] pointer-events-none -z-10"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-        {/* Eyebrow Announcement Pill */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-bg-card/80 border border-accent-cyan/30 text-xs font-mono text-text-secondary mb-8 shadow-[0_0_20px_rgba(0,240,255,0.15)] hover:border-accent-cyan/60 transition-all cursor-default">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-cyan opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan"></span>
-          </span>
-          <span className="text-white font-medium">{siteConfig.hero_badge}</span>
-          <span className="text-accent-cyan font-bold">→</span>
-        </div>
-
-        {/* Main Headline */}
-        <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.1] mb-6">
-          Hard Engineering. <br />
-          <span className="text-gradient-cyan">Scaled to Perfection.</span>
-        </h1>
-
-        {/* Subtitle */}
-        <p className="text-text-secondary text-base sm:text-xl max-w-2xl font-sans leading-relaxed mb-10 text-balance">
-          {siteConfig.hero_subtitle}
-        </p>
-
-        {/* Dual Call-to-Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 w-full sm:w-auto">
-          <a
-            href="#shop"
-            onClick={() => setActiveView('landing')}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-heading font-bold tracking-wide bg-gradient-to-r from-accent-cyan via-accent-cyan to-accent-violet text-bg-main hover:opacity-95 transition-all shadow-[0_0_30px_rgba(0,240,255,0.35)] hover:shadow-[0_0_40px_rgba(0,240,255,0.5)] transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
-          >
-            <span>Order Hardware</span>
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
-
-          <a
-            href="#estimator"
-            onClick={() => setActiveView('landing')}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-heading font-semibold tracking-wide bg-bg-card/80 border border-white/15 text-white hover:border-accent-cyan/50 hover:bg-bg-card transition-all flex items-center justify-center gap-2 backdrop-blur-md"
-          >
-            <span>Consult Engineering Team</span>
-            <span className="text-text-muted">↗</span>
-          </a>
-        </div>
-
-        {/* Interactive Hero Terminal / Architecture Diagnostic Preview */}
-        <div className="w-full max-w-3xl glass-panel rounded-2xl overflow-hidden shadow-2xl border border-white/10 hover:border-accent-cyan/30 transition-all text-left">
-          {/* Terminal Window Header */}
-          <div className="bg-bg-main/90 px-4 py-3 border-b border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-accent-rose/80 inline-block"></span>
-              <span className="w-3 h-3 rounded-full bg-accent-amber/80 inline-block"></span>
-              <span className="w-3 h-3 rounded-full bg-accent-emerald/80 inline-block"></span>
-              <span className="ml-3 font-mono text-xs text-text-muted">bashix-telemetry-node // session active</span>
+    <section className="pt-28 pb-16 md:pt-36 md:pb-24 border-b border-border-subtle relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column: Clear Value Proposition */}
+          <div className="lg:col-span-6 flex flex-col items-start text-left">
+            <div className="text-xs font-mono uppercase tracking-wider text-accent-primary font-semibold mb-3">
+              Jakarta, Indonesia // Hardware Engineering
             </div>
-            <div className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-accent-emerald/10 text-accent-emerald text-[11px] font-mono border border-accent-emerald/20">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-pulse"></span>
-                0.004ms JITTER
-              </span>
-              <button
-                onClick={copyCommand}
-                className="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-[11px] font-mono text-text-secondary hover:text-white transition-colors flex items-center gap-1.5"
-                title="Copy Quickstart Command"
+
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-primary tracking-tight leading-[1.15] mb-6">
+              Industrial IoT Hardware and Embedded Computing Systems
+            </h1>
+
+            <p className="text-text-secondary text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
+              We design, assemble, and support ruggedized edge compute gateways, environmental telemetry nodes, and neural acceleration hardware. Built for factory automation, energy grids, and field telemetry.
+            </p>
+
+            {/* Direct Functional Actions */}
+            <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+              <a
+                href="#catalog"
+                onClick={() => setActiveView('landing')}
+                className="px-6 py-3 rounded-lg text-sm font-semibold bg-accent-primary text-white hover:bg-sky-600 transition-colors focus-visible:ring-2 focus-visible:ring-accent-primary"
               >
-                <span>{copied ? 'Copied!' : 'Copy CLI'}</span>
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                </svg>
-              </button>
+                Browse Hardware Catalog
+              </a>
+
+              <a
+                href="#schematic"
+                onClick={() => setActiveView('landing')}
+                className="px-6 py-3 rounded-lg text-sm font-semibold bg-bg-card border border-border-subtle text-text-primary hover:border-border-subtle/80 hover:bg-bg-card-hover transition-colors focus-visible:ring-2 focus-visible:ring-accent-primary"
+              >
+                View Interface Architecture
+              </a>
+            </div>
+
+            {/* Hardware Delivery Notice */}
+            <div className="mt-8 pt-6 border-t border-border-subtle/60 w-full flex items-center gap-4 text-xs font-mono text-text-muted">
+              <span className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-accent-emerald"></span>
+                Units in stock for dispatch
+              </span>
+              <span>•</span>
+              <span>Direct B2B invoicing available</span>
             </div>
           </div>
 
-          {/* Terminal Body */}
-          <div className="p-5 font-mono text-xs text-text-secondary space-y-2 bg-bg-card/50">
-            <div className="flex items-center text-text-muted">
-              <span className="text-accent-cyan mr-2 font-bold">$</span>
-              <span className="text-white">bashix telemetry connect --node edgecore-02.infra.id</span>
-            </div>
-            <div className="text-accent-emerald pl-4">
-              [OK] Authenticated via hardware TPM 2.0 • Ed25519 verified
-            </div>
-            <div className="text-text-muted pl-4">
-              [KERNEL] Linux 6.8.0-rt (PREEMPT_RT) • Arch: RISC-V 64-bit • Cores: 4 @ 1.8GHz
-            </div>
-            <div className="text-text-muted pl-4 flex items-center gap-3">
-              <span>[THROUGHPUT] 10,485,760 pkts/sec</span>
-              <span className="text-accent-cyan">|</span>
-              <span className="text-accent-cyan">eBPF Filter: Active (0 packet loss)</span>
-            </div>
-            <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] text-text-muted">
-              <span>CAN-FD Bus: 8 Mbps Deterministic</span>
-              <span>Memory: 1.4GB / 16GB LPDDR5</span>
-              <span>Temp: 38.4°C (Fanless Passive)</span>
+          {/* Right Column: Interactive Hardware Interface Inspector */}
+          <div id="schematic" className="lg:col-span-6 w-full">
+            <div className="industrial-card p-6 shadow-xl">
+              <div className="flex items-center justify-between pb-4 mb-4 border-b border-border-subtle">
+                <div className="flex items-center gap-2 font-mono text-xs text-text-primary">
+                  <span className="font-bold text-accent-primary">MODEL:</span>
+                  <span>BX-GW-02 // EdgeCore v2</span>
+                </div>
+                <div className="text-[11px] font-mono px-2 py-0.5 rounded bg-bg-main border border-border-subtle text-text-muted">
+                  Interactive Pinout Viewer
+                </div>
+              </div>
+
+              {/* Interface Selector Tabs */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+                <button
+                  onClick={() => setActivePort('eth')}
+                  className={`px-3 py-2 rounded text-xs font-mono text-left transition-colors border ${
+                    activePort === 'eth'
+                      ? 'bg-accent-primary text-white border-accent-primary font-bold'
+                      : 'bg-bg-main text-text-secondary border-border-subtle hover:text-text-primary'
+                  }`}
+                >
+                  Dual GbE TSN
+                </button>
+                <button
+                  onClick={() => setActivePort('rs485')}
+                  className={`px-3 py-2 rounded text-xs font-mono text-left transition-colors border ${
+                    activePort === 'rs485'
+                      ? 'bg-accent-primary text-white border-accent-primary font-bold'
+                      : 'bg-bg-main text-text-secondary border-border-subtle hover:text-text-primary'
+                  }`}
+                >
+                  Isolated RS-485
+                </button>
+                <button
+                  onClick={() => setActivePort('can')}
+                  className={`px-3 py-2 rounded text-xs font-mono text-left transition-colors border ${
+                    activePort === 'can'
+                      ? 'bg-accent-primary text-white border-accent-primary font-bold'
+                      : 'bg-bg-main text-text-secondary border-border-subtle hover:text-text-primary'
+                  }`}
+                >
+                  Dual CAN-FD
+                </button>
+                <button
+                  onClick={() => setActivePort('power')}
+                  className={`px-3 py-2 rounded text-xs font-mono text-left transition-colors border ${
+                    activePort === 'power'
+                      ? 'bg-accent-primary text-white border-accent-primary font-bold'
+                      : 'bg-bg-main text-text-secondary border-border-subtle hover:text-text-primary'
+                  }`}
+                >
+                  9-36V DC Power
+                </button>
+              </div>
+
+              {/* Selected Port Specifications Display */}
+              <div className="bg-bg-main p-5 rounded-lg border border-border-subtle">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-heading font-bold text-base text-text-primary">
+                    {selected.title}
+                  </h3>
+                  <span className="text-[11px] font-mono text-accent-primary">
+                    {selected.spec}
+                  </span>
+                </div>
+
+                <div className="text-xs font-mono text-text-muted mb-4">
+                  Connector type: {selected.connector}
+                </div>
+
+                <div className="space-y-2">
+                  {selected.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-start gap-2 text-xs font-mono text-text-secondary">
+                      <span className="text-accent-primary font-bold">›</span>
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Physical Enclosure Metrics */}
+              <div className="mt-4 pt-4 border-t border-border-subtle grid grid-cols-3 gap-2 text-[11px] font-mono text-text-muted">
+                <div>
+                  <span className="block text-text-primary font-semibold">Dimensions:</span>
+                  142 x 98 x 42 mm
+                </div>
+                <div>
+                  <span className="block text-text-primary font-semibold">Enclosure:</span>
+                  Anodized Aluminum
+                </div>
+                <div>
+                  <span className="block text-text-primary font-semibold">Mounting:</span>
+                  DIN Rail 35mm
+                </div>
+              </div>
             </div>
           </div>
         </div>
