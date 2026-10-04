@@ -16,17 +16,17 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 30);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { label: 'Hardware Catalog', href: '#catalog' },
-    { label: 'I/O & Architecture', href: '#schematic' },
-    { label: 'Technical Specifications', href: '#specs' },
-    { label: 'Contact Office', href: '#contact' }
+    { label: 'Hardware', href: '#catalog' },
+    { label: 'Architecture', href: '#schematic' },
+    { label: 'Specifications', href: '#specs' },
+    { label: 'Contact', href: '#contact' }
   ];
 
   const handleNavClick = () => {
@@ -38,62 +38,53 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-bg-main/95 border-b border-border-subtle shadow-md py-3'
-          : 'bg-bg-main/80 border-b border-border-subtle/50 py-4'
+          ? 'bg-bg-main/90 backdrop-blur-xl border-b border-border-subtle/80 shadow-2xl py-3.5'
+          : 'bg-transparent border-b border-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo / Brand Name */}
+          {/* Logo / Brand Name (like /antislop in reference) */}
           <a
             href="#"
             onClick={() => setActiveView('landing')}
-            className="flex items-center gap-3 focus-visible:ring-2 focus-visible:ring-accent-amber rounded p-1"
+            className="flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-accent-amber rounded py-1 px-1.5 group"
           >
-            <div className="w-8 h-8 rounded bg-bg-card border border-border-subtle flex items-center justify-center text-text-primary font-mono font-bold text-sm">
-              BX
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="font-heading font-bold text-lg tracking-wider text-text-primary">
-                  BASHIX
-                </span>
-                <span className="text-[10px] font-mono px-1 py-0.2 rounded bg-border-subtle text-text-secondary">
-                  .id
-                </span>
-              </div>
-              <span className="text-[10px] font-mono text-text-muted uppercase tracking-wider">
-                Industrial Systems & Hardware
-              </span>
-            </div>
+            <span className="font-heading font-extrabold text-xl tracking-tight text-white group-hover:text-accent-amber transition-colors">
+              /bashix
+            </span>
+            <span className="text-[10px] font-mono text-white/50 tracking-wider">
+              .id
+            </span>
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center gap-7" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={handleNavClick}
-                className="text-xs font-medium text-text-secondary hover:text-text-primary transition-colors focus-visible:ring-2 focus-visible:ring-accent-amber rounded px-1 py-0.5"
+                className="text-xs font-medium text-white/80 hover:text-white transition-colors focus-visible:ring-2 focus-visible:ring-accent-amber rounded py-0.5 px-1 flex items-center gap-1"
               >
-                {link.label}
+                <span>{link.label}</span>
+                <span className="text-[9px] text-white/40">▾</span>
               </a>
             ))}
           </nav>
 
           {/* Right Actions */}
           <div className="hidden sm:flex items-center gap-3">
-            {/* Currency Switcher */}
-            <div className="flex items-center bg-bg-card border border-border-subtle rounded p-0.5 text-xs font-mono">
+            {/* Currency Selector */}
+            <div className="flex items-center bg-black/40 backdrop-blur-md border border-white/10 rounded-full p-0.5 text-xs font-mono">
               <button
                 onClick={() => setCurrency('IDR')}
-                className={`px-2 py-1 rounded transition-colors ${
+                className={`px-2.5 py-1 rounded-full transition-colors ${
                   currency === 'IDR'
-                    ? 'bg-border-subtle text-text-primary font-bold'
-                    : 'text-text-muted hover:text-text-primary'
+                    ? 'bg-white/20 text-white font-bold'
+                    : 'text-white/60 hover:text-white'
                 }`}
                 title="Display prices in Indonesian Rupiah"
               >
@@ -101,10 +92,10 @@ export default function Navbar() {
               </button>
               <button
                 onClick={() => setCurrency('USD')}
-                className={`px-2 py-1 rounded transition-colors ${
+                className={`px-2.5 py-1 rounded-full transition-colors ${
                   currency === 'USD'
-                    ? 'bg-border-subtle text-text-primary font-bold'
-                    : 'text-text-muted hover:text-text-primary'
+                    ? 'bg-white/20 text-white font-bold'
+                    : 'text-white/60 hover:text-white'
                 }`}
                 title="Display prices in US Dollars"
               >
@@ -115,11 +106,11 @@ export default function Navbar() {
             {/* Shopping Cart Button */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative px-3 py-2 rounded bg-bg-card border border-border-subtle hover:border-text-secondary text-xs font-mono text-text-primary transition-colors flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-accent-amber"
+              className="relative px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 hover:border-white/30 text-xs font-mono text-white transition-all flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-accent-amber"
               aria-label="Open Shopping Cart"
             >
               <span>Cart</span>
-              <span className="px-1.5 py-0.2 rounded bg-bg-main border border-border-subtle text-accent-amber font-bold text-[11px]">
+              <span className="px-1.5 py-0.2 rounded-full bg-white/20 text-accent-amber font-bold text-[11px]">
                 {cartItemCount}
               </span>
             </button>
@@ -127,22 +118,22 @@ export default function Navbar() {
             {/* Admin Portal Toggle */}
             <button
               onClick={() => setActiveView(activeView === 'admin' ? 'landing' : 'admin')}
-              className={`px-3 py-2 rounded text-xs font-mono transition-colors border ${
+              className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all border ${
                 activeView === 'admin'
                   ? 'bg-accent-amber text-bg-main border-accent-amber font-bold'
-                  : 'bg-bg-card text-text-secondary border-border-subtle hover:text-text-primary hover:border-border-subtle/80'
+                  : 'bg-black/40 backdrop-blur-md text-white/70 border-white/10 hover:text-white hover:border-white/25'
               }`}
             >
               {activeView === 'admin' ? 'Exit Admin' : 'Admin'}
             </button>
 
-            {/* Contact Action */}
+            {/* Pill CTA (like 'Install antislop' in reference) */}
             <a
-              href="#contact"
+              href="#catalog"
               onClick={handleNavClick}
-              className="px-3.5 py-2 rounded text-xs font-semibold bg-accent-primary text-bg-main hover:bg-white transition-colors focus-visible:ring-2 focus-visible:ring-accent-amber"
+              className="px-4 py-1.5 rounded-full text-xs font-semibold bg-white/10 backdrop-blur-md border border-white/25 hover:border-white/50 text-white hover:bg-white/20 transition-all focus-visible:ring-2 focus-visible:ring-accent-amber"
             >
-              Contact Sales
+              Order Hardware
             </a>
           </div>
 
@@ -150,13 +141,13 @@ export default function Navbar() {
           <div className="flex sm:hidden items-center gap-2">
             <button
               onClick={() => setIsCartOpen(true)}
-              className="px-2.5 py-1.5 rounded bg-bg-card border border-border-subtle text-xs font-mono text-text-primary"
+              className="px-2.5 py-1.5 rounded-full bg-black/40 border border-white/10 text-xs font-mono text-white"
             >
               Cart ({cartItemCount})
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded bg-bg-card border border-border-subtle text-text-secondary hover:text-text-primary focus-visible:ring-2 focus-visible:ring-accent-amber"
+              className="p-2 rounded-lg bg-black/40 border border-white/10 text-white/80 hover:text-white focus-visible:ring-2 focus-visible:ring-accent-amber"
               aria-label="Toggle Navigation Menu"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -173,29 +164,29 @@ export default function Navbar() {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="sm:hidden bg-bg-card border-b border-border-subtle px-6 py-4 flex flex-col gap-3 mt-3">
+        <div className="sm:hidden bg-bg-main/95 backdrop-blur-2xl border-b border-border-subtle px-6 py-4 flex flex-col gap-3 mt-3">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={handleNavClick}
-              className="text-sm font-medium text-text-secondary hover:text-text-primary py-1"
+              className="text-sm font-medium text-white/80 hover:text-white py-1"
             >
               {link.label}
             </a>
           ))}
-          <div className="pt-3 border-t border-border-subtle flex items-center justify-between">
+          <div className="pt-3 border-t border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-1 font-mono text-xs">
-              <span className="text-text-muted mr-1">Currency:</span>
+              <span className="text-white/50 mr-1">Currency:</span>
               <button
                 onClick={() => setCurrency('IDR')}
-                className={`px-2 py-0.5 rounded ${currency === 'IDR' ? 'bg-border-subtle text-text-primary font-bold' : 'text-text-secondary'}`}
+                className={`px-2 py-0.5 rounded ${currency === 'IDR' ? 'bg-white/20 text-white font-bold' : 'text-white/60'}`}
               >
                 IDR
               </button>
               <button
                 onClick={() => setCurrency('USD')}
-                className={`px-2 py-0.5 rounded ${currency === 'USD' ? 'bg-border-subtle text-text-primary font-bold' : 'text-text-secondary'}`}
+                className={`px-2 py-0.5 rounded ${currency === 'USD' ? 'bg-white/20 text-white font-bold' : 'text-white/60'}`}
               >
                 USD
               </button>
@@ -205,7 +196,7 @@ export default function Navbar() {
                 setActiveView(activeView === 'admin' ? 'landing' : 'admin');
                 setMobileMenuOpen(false);
               }}
-              className="text-xs font-mono px-3 py-1 rounded bg-bg-main border border-border-subtle text-accent-amber"
+              className="text-xs font-mono px-3 py-1 rounded bg-white/10 border border-white/15 text-accent-amber"
             >
               {activeView === 'admin' ? 'Exit Admin' : 'Admin'}
             </button>
