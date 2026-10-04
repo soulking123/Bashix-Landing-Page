@@ -3,7 +3,7 @@ import { initialProducts } from '../data/initialProducts';
 import { initialConfig } from '../data/initialConfig';
 
 const LOCAL_STORAGE_KEYS = {
-  PRODUCTS: 'bashix_products',
+  PRODUCTS: 'bashix_products_v2',
   ORDERS: 'bashix_orders',
   LEADS: 'bashix_leads',
   SETTINGS: 'bashix_settings'

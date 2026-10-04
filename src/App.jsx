@@ -269,6 +269,18 @@ export default function App() {
                         </span>
                       </div>
 
+                      {/* Product Hardware Studio Image */}
+                      {item.image_url && (
+                        <div className="relative w-full aspect-4/3 rounded bg-black/60 overflow-hidden mb-4 border border-border-subtle group">
+                          <img
+                            src={item.image_url}
+                            alt={item.name}
+                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+
                       {/* Product Title & Category */}
                       <h3 className="font-heading font-bold text-lg text-white mb-1">
                         {item.name}
@@ -466,11 +478,20 @@ export default function App() {
                   ) : (
                     cart.map((item) => (
                       <div key={item.product.id} className="p-3 rounded bg-bg-main border border-border-subtle flex items-center justify-between gap-4">
-                        <div>
-                          <div className="text-xs font-mono text-accent-amber">{item.product.sku}</div>
-                          <div className="font-heading font-semibold text-sm text-white">{item.product.name}</div>
-                          <div className="text-xs font-mono text-text-muted">
-                            Rp {item.product.price_idr.toLocaleString('id-ID')}
+                        <div className="flex items-center gap-3">
+                          {item.product.image_url && (
+                            <img
+                              src={item.product.image_url}
+                              alt={item.product.name}
+                              className="w-12 h-12 rounded object-cover border border-border-subtle bg-black shrink-0"
+                            />
+                          )}
+                          <div>
+                            <div className="text-xs font-mono text-accent-amber">{item.product.sku}</div>
+                            <div className="font-heading font-semibold text-sm text-white">{item.product.name}</div>
+                            <div className="text-xs font-mono text-text-muted">
+                              Rp {item.product.price_idr.toLocaleString('id-ID')}
+                            </div>
                           </div>
                         </div>
 

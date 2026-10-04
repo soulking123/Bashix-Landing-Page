@@ -45,3 +45,17 @@
 5. **No Decorative Button Arrows (R-15):** Buttons state clear functional verbs.
 6. **No Capsule Eyebrow Badges (R-11):** Clean typography directly over the atmosphere.
 7. **Transparent Floating Navigation (R-24):** Clean floating header with `/bashix` wordmark that allows the atmospheric sky to reach the top of the viewport.
+
+---
+
+## 6. Architecture & Showcase Matrix (Booster Robotics + Bambu Lab + DJI)
+Inspired directly by the engineering web standards of **Booster Robotics**, **Bambu Lab**, and **DJI**:
+
+| Pillar | Booster Robotics (`booster.tech`) | Bambu Lab (`bambulab.com`) | DJI (`dji.com`) | Bashix Implementation (`bashix.id`) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Hero Stage** | Flagship carousel with model typography | Full-bleed studio lighting & punchy tagline | Cinematic hero banner with dual action buttons | Full-bleed cinematic hero + flagship model carousel switcher |
+| **Action Paradigm** | "Buy Now" (pill) + "Learn More" (frosted) | "Buy now" + "Learn More" | "Buy Now" + "Learn More" | "Order Hardware" (accent) + "Explore Architecture" (frosted pill) |
+| **Product Showcase** | Developer robotics units & SDK | Symmetrical 2-column hardware studio cards | High-contrast spec cards & model tabs | 4-Tier physical hardware catalog with custom CNC/die-cast studio renders |
+| **Deep Engineering** | Open SDK, Studio, competition platforms | Exploded mechanical architecture | Enterprise field reliability & IP ratings | Interactive schematic I/O inspector (Dual GbE TSN, isolated RS-485, CAN-FD) |
+| **Store & Cart** | Store button in header | Direct checkout & modular parts | Retail/Store drawer | Slide-over cart drawer with 100% IDR (`Rp`) pricing & Supabase live sync |
+| **Admin Route** | Internal/No visible link | Internal/No visible link | Internal/No visible link | Manual route only (`#admin` or `/admin`) |
