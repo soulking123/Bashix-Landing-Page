@@ -1,89 +1,114 @@
 @import "tailwindcss";
 
 @theme {
-  /* Surfaces & Backgrounds - Clean Architectural Light & Industrial Studio */
-  --color-bg-main: #FFFFFF;
-  --color-bg-card: #FFFFFF;
-  --color-bg-card-hover: #F8F9FA;
-  --color-bg-admin: #F8F9FA;
-  --color-border-subtle: #E2E8F0;
-  --color-border-focus: #0F172A;
-
-  /* Functional Accents - High Contrast Industrial Slate, Amber & Emerald */
-  --color-accent-primary: #0F172A;
-  --color-accent-amber: #D97706;     /* Telemetry Amber */
-  --color-accent-sunset: #EA580C;    /* Industrial Orange */
-  --color-accent-emerald: #059669;   /* Live / In-Stock */
-  --color-accent-rose: #DC2626;      /* Fault Indicator */
-
-  /* High-Contrast Typography for Light Mode */
-  --color-text-primary: #0F172A;     /* Deep slate / near black */
-  --color-text-secondary: #475569;   /* Crisp mid-slate */
-  --color-text-muted: #64748B;       /* Technical caption slate */
-
-  /* Font Families */
-  --font-heading: 'Space Grotesk', sans-serif;
-  --font-sans: 'Inter', sans-serif;
+  /* Fonts */
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+
+  /* Color Palette - Area Design Tokens */
+  --color-area-bg: #FAFAF8;
+  --color-area-surface: #FFFFFF;
+  --color-area-sage: #D4DEC5;
+  --color-area-sage-hover: #C5D0B5;
+  --color-area-sage-soft: #EEF2E8;
+  --color-area-olive: #364121;
+  --color-area-olive-dark: #2B3519;
+  --color-area-olive-label: #55623B;
+  --color-area-border: #E2E6DC;
+  --color-area-border-subtle: #ECEFE8;
+  
+  --color-area-text: #181B15;
+  --color-area-text-secondary: #4A4E44;
+  --color-area-text-muted: #757B6E;
 }
 
 /* Base resets */
 html {
   color-scheme: light;
-  background-color: #FFFFFF;
-  color: #0F172A;
+  background-color: #FAFAF8;
+  color: #181B15;
 }
 
-/* Engineered scrollbar for light theme */
+body {
+  font-family: var(--font-sans);
+}
+
+/* Editorial display typography */
+.font-display {
+  font-family: var(--font-serif);
+}
+
+/* Subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8F9FA;
+  background: #FAFAF8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 3px;
+  background: #D4DEC5;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #B6C2A5;
 }
 
-/* Tactile focus ring utility */
+/* Keyboard Accessible Focus */
 :focus-visible {
-  outline: 2px solid #0F172A;
+  outline: 2px solid #364121;
   outline-offset: 2px;
 }
 
-/* Industrial Card - Clean White Architectural Card */
-.industrial-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+/* Custom interactive button styles from Figma */
+.btn-primary-pill {
+  background-color: #364121;
+  color: #FFFFFF;
+  border-radius: 9999px;
+  padding: 0.625rem 1.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 44px;
 }
 
-.industrial-card:hover {
-  border-color: #CBD5E1;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+.btn-primary-pill:hover {
+  background-color: #293219;
+  transform: translateY(-1px);
 }
 
-/* Frosted Command Pill (Light Mode DJI / Bambu Style) */
-.frosted-pill {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
-  color: #0F172A;
+.btn-primary-pill:active {
+  transform: translateY(0);
 }
 
-.frosted-pill:hover {
-  border-color: rgba(15, 23, 42, 0.25);
-  background: rgba(255, 255, 255, 0.98);
+.btn-secondary-pill {
+  background-color: #D4DEC5;
+  color: #181B15;
+  border-radius: 9999px;
+  padding: 0.625rem 1.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 44px;
+}
+
+.btn-secondary-pill:hover {
+  background-color: #C6D2B5;
+  transform: translateY(-1px);
+}
+
+.btn-secondary-pill:active {
+  transform: translateY(0);
 }

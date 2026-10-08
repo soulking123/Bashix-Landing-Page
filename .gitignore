@@ -6,6 +6,7 @@ node_modules/
 # Production build
 dist/
 build/
+*.zip
 
 # Local Environment Variables
 .env

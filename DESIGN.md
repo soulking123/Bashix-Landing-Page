@@ -2,61 +2,58 @@
 
 ## 1. Brand Identity & Product Scope
 - **Name:** Bashix (`bashix.id`)
-- **Location:** Jakarta, Indonesia
-- **Core Offering:** Turnkey physical industrial IoT hardware, edge compute units, sensor nodes, and custom electronic engineering services.
-- **Personality:** Tangible industrial craftsmanship, rugged technical reliability, monolithic engineering scale. Inspired by cinematic industrial engineering (Simon Stålenhag, Denis Villeneuve, Keyence, and Framework).
-- **Tone:** Professional, direct, grounded, evidence-driven. Zero generic AI marketing hype.
+- **Core Offering:** Mission-critical industrial IoT hardware, edge compute nodes, embedded firmware, and distributed telemetry platforms.
+- **Personality:** Tangible engineering craftsmanship, calm editorial elegance, monolithic precision. Natural and organic modernism inspired by technical architectural journals.
+- **Tone:** Authoritative, direct, grounded, evidence-driven. Zero generic AI marketing hype.
 
 ---
 
 ## 2. Antislop Dials
-- **ENERGY:** 3 (High-contrast cinematic atmosphere, strong typography, focused composition)
-- **RHYTHM:** 3 (Spacious atmospheric hero transitioning into tactile technical specification grids)
-- **MOTION:** 2 (Smooth frosted glass hover interactions, copy feedback; no distracting particle storms)
+- **ENERGY:** 2 (Warm, calm, editorial authority with generous whitespace and intentional focal points)
+- **RHYTHM:** 3 (Dynamic section rhythm: expansive hero with pure visual device render, 4-column engineering capabilities, asymmetric systems showcase, comparison matrix, field verification testimonial, 3-step deployment workflow)
+- **MOTION:** 2 (Smooth frosted glass hover interactions, modal focus transitions, zero distracting loops)
 
 ---
 
-## 3. Color Palette: Clean Architectural White & Industrial Studio (Bambu Lab & DJI Standard)
-- **Background Primary:** `#FFFFFF` (Pure crisp white background)
-- **Surface Panels:** `#FFFFFF` (Architectural white cards with subtle shadow and hairline border)
-- **Surface Secondary / Raised:** `#F8F9FA` & `#F1F5F9` (Subtle light slate interactive hover & container backgrounds)
-- **Borders:** `#E2E8F0` (Crisp structural hairline slate border)
-- **Border Active / Focus:** `#0F172A` / `#D97706` (Deep charcoal & telemetry amber)
-- **Text Primary:** `#0F172A` (High-contrast deep slate / near black)
-- **Text Secondary:** `#475569` (Legible mid-tone technical slate)
-- **Text Muted:** `#64748B` (Technical annotations, SKUs and metadata)
-- **Primary CTA Buttons:** `#0F172A` (Deep solid charcoal/black with white text, matching DJI/Apple/Bambu standard)
-- **Hero Artwork:** Full-bleed bright daylight architectural showroom with precision robotic hardware (`/images/bashix-hero-light.jpg`).
-- **Pricing Currency:** 100% Indonesian Rupiah (IDR / Rp) exclusively. No USD currency toggle.
+## 3. Color Palette: Organic Earth & Clean Studio (Figma Standards)
+- **Background Primary:** `#FAFAF8` (Warm soft natural off-white background)
+- **Surface Crisp:** `#FFFFFF` (Clean white cards and tablet UI surfaces)
+- **Surface Accent / Sage Light:** `#D4DEC5` (Soft sage for hero backdrop and secondary buttons)
+- **Surface Accent / Sage Tint:** `#ECEEE8` (Light neutral for table rows and subtle dividers)
+- **Borders:** `#E2E6DC` (Hairline organic slate/sage border)
+- **Text Primary:** `#181B15` (Deep warm charcoal / near black)
+- **Text Secondary:** `#4A4E44` (Crisp mid-tone natural slate)
+- **Text Muted / Accent:** `#55623B` (Earthy olive green labels, section categories, metadata)
+- **Primary CTA Buttons:** `#364121` (Deep solid olive green with white text, pill radius)
+- **Secondary CTA Buttons:** `#D4DEC5` (Soft sage pill with `#181B15` text)
 
 ---
 
 ## 4. Typography
-- **Headings:** `Space Grotesk` (Geometric, clean technical authority)
-- **Interface & Body:** `Inter` (Standard for high legibility at 14px to 16px)
-- **Command Pill, SKUs & Pinouts:** `JetBrains Mono` (High-contrast monospace)
+- **Headings & Display:** `Newsreader` / Serif (Editorial high-contrast serif with refined authority)
+- **Body & UI Text:** `Inter` (Standard for high legibility at 14px to 16px)
+- **Metadata, Numbers & Steps:** `JetBrains Mono` (Crisp, proportional technical numerals)
 
 ---
 
-## 5. Anti-Slop Guidelines (Explicit Revisions)
-1. **No Em Dashes (R-02):** Zero em dashes (`—`) in copy.
-2. **No Fake Statistics (R-17 & R-36):** Real technical specifications only: operating voltages (9-36V DC), temperature ratings (-40°C to +85°C), processor clock speeds, and memory configurations.
-3. **No Fake Terminal Window (R-08 & R-10):** Replaced with a single tactile frosted command pill (`curl -sSL https://bashix.id/init | sh`) directly centered in the cinematic composition.
-4. **No Gratuitous Blur Blobs (R-01 & R-07):** Hero is powered by real, evocative, full-bleed artwork rather than empty space with random CSS blur circles.
-5. **No Decorative Button Arrows (R-15):** Buttons state clear functional verbs.
-6. **No Capsule Eyebrow Badges (R-11):** Clean typography directly over the atmosphere.
-7. **Transparent Floating Navigation (R-24):** Clean floating header with `/bashix` wordmark that allows the atmospheric sky to reach the top of the viewport.
+## 5. Anti-Slop Implementation
+1. **Zero Em Dashes (R-02):** No em dash character (`—`) in any UI text.
+2. **Real Technical Specifications (R-17 & R-36):** Operating voltages (9-36V DC), temperature ratings (-40°C to +85°C), galvanic isolation (2.5kV), Dual TSN GbE.
+3. **Hero Visual Paradigm:** Dedicated single high-resolution device mockup image under the headline rather than overly complex domestic UI components.
+4. **Interactive Verification (R-26):** All buttons and navigation anchors perform real actions (smooth scrolling, technical consultation booking, architectural datasheet modal).
+5. **Mobile Reflow (R-03):** 3-tier responsiveness corresponding to Figma's Desktop (`1280+`), Tablet (`800–1279`), and Mobile (`1–799`) frames.
+6. **Accessibility & Contrast (R-25 & R-32):** WCAG AA 4.5:1 text contrast, visible `:focus-visible` outlines, and full keyboard operability.
 
 ---
 
-## 6. Architecture & Showcase Matrix (Booster Robotics + Bambu Lab + DJI)
-Inspired directly by the engineering web standards of **Booster Robotics**, **Bambu Lab**, and **DJI**:
+## 6. Layout Rhythm & Spacing Refinement
+- **Container Sizing:** Standardized across all sections to `max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8` to match Figma's live site bounds (`~1200px`) and prevent excessive horizontal gutters.
+- **Vertical Spacing:** Reduced excessive gaps from `py-20..py-36` down to snug `py-10 md:py-16` across sections, matching the live Figma reference layout.
+- **Section Margins:** Reduced dead space between section headlines, content grids, and imagery from 64-96px down to 24-48px.
+- **Curated Engineering Imagery:**
+  - Hero Display: High-resolution telemetry tablet displaying real-time bus metrics and oscilloscope waveforms on sage backing.
+  - Big Picture Panorama: Modern advanced robotics and industrial engineering research laboratory.
+  - Hardware Sculpture: CNC-machined anodized aluminum edge compute module with passive heatsink fins on architectural travertine pedestal.
+  - Testimonial Artifact: Kinetic gimbal gyroscope mechanism symbolizing precision tolerance and physical stability.
+  - Infrastructure Banner: Clean offshore energy telemetry and wind array landscape in serene morning mist.
 
-| Pillar | Booster Robotics (`booster.tech`) | Bambu Lab (`bambulab.com`) | DJI (`dji.com`) | Bashix Implementation (`bashix.id`) |
-| :--- | :--- | :--- | :--- | :--- |
-| **Hero Stage** | Flagship carousel with model typography | Full-bleed studio lighting & punchy tagline | Cinematic hero banner with dual action buttons | Full-bleed cinematic hero + flagship model carousel switcher |
-| **Action Paradigm** | "Buy Now" (pill) + "Learn More" (frosted) | "Buy now" + "Learn More" | "Buy Now" + "Learn More" | "Order Hardware" (accent) + "Explore Architecture" (frosted pill) |
-| **Product Showcase** | Developer robotics units & SDK | Symmetrical 2-column hardware studio cards | High-contrast spec cards & model tabs | 4-Tier physical hardware catalog with custom CNC/die-cast studio renders |
-| **Deep Engineering** | Open SDK, Studio, competition platforms | Exploded mechanical architecture | Enterprise field reliability & IP ratings | Interactive schematic I/O inspector (Dual GbE TSN, isolated RS-485, CAN-FD) |
-| **Store & Cart** | Store button in header | Direct checkout & modular parts | Retail/Store drawer | Slide-over cart drawer with 100% IDR (`Rp`) pricing & Supabase live sync |
-| **Admin Route** | Internal/No visible link | Internal/No visible link | Internal/No visible link | Manual route only (`#admin` or `/admin`) |
