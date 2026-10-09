@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Navbar from './components/area/Navbar';
 import Hero from './components/area/Hero';
 import Benefits from './components/area/Benefits';
+import Services from './components/landing/Services';
+import TechShowcase from './components/landing/TechShowcase';
 import BigPicture from './components/area/BigPicture';
 import Specifications from './components/area/Specifications';
 import TestimonialAndSteps from './components/area/TestimonialAndSteps';
@@ -26,6 +28,12 @@ export default function App() {
 
         {/* Benefits Section */}
         <Benefits />
+
+        {/* Engineering Services Capability Cards (Phase 3) */}
+        <Services />
+
+        {/* The Bashix Engine Interactive Tech Showcase (Phase 3) */}
+        <TechShowcase />
 
         {/* Big Picture Section */}
         <BigPicture onOpenDiscover={() => setIsDiscoverOpen(true)} />

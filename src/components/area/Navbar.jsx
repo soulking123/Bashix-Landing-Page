@@ -24,9 +24,10 @@ export default function Navbar({ onOpenContact }) {
 
   const navLinks = [
     { label: 'Capabilities', href: '#capabilities' },
+    { label: 'Services', href: '#services' },
+    { label: 'The Engine', href: '#engine' },
     { label: 'Specifications', href: '#specifications' },
-    { label: 'Architecture', href: '#architecture' },
-    { label: 'Contact Us', href: '#contact' },
+    { label: 'Deployment', href: '#architecture' },
   ];
 
   return (
