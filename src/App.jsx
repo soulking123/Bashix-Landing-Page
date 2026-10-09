@@ -4,6 +4,7 @@ import Hero from './components/area/Hero';
 import Benefits from './components/area/Benefits';
 import Services from './components/landing/Services';
 import TechShowcase from './components/landing/TechShowcase';
+import Storefront from './components/shop/Storefront';
 import Process from './components/landing/Process';
 import BigPicture from './components/area/BigPicture';
 import CaseStudies from './components/landing/CaseStudies';
@@ -14,15 +15,24 @@ import Connect from './components/area/Connect';
 import Footer from './components/area/Footer';
 import ContactModal from './components/area/ContactModal';
 import DiscoverModal from './components/area/DiscoverModal';
+import ProductModal from './components/shop/ProductModal';
+import CartDrawer from './components/shop/CartDrawer';
+import { useStore } from './context/StoreContext';
 
 export default function App() {
+  const { addToCart } = useStore();
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
   const [contactPrefill, setContactPrefill] = useState(null);
+  const [selectedProductForModal, setSelectedProductForModal] = useState(null);
 
   const handleOpenContact = (prefill = null) => {
     setContactPrefill(prefill);
     setIsContactOpen(true);
+  };
+
+  const handleOpenDatasheet = (product) => {
+    setSelectedProductForModal(product);
   };
 
   return (
@@ -43,6 +53,9 @@ export default function App() {
 
         {/* The Bashix Engine Interactive Tech Showcase (Phase 3) */}
         <TechShowcase />
+
+        {/* Physical Hardware Storefront (Phase 5) */}
+        <Storefront onViewDatasheet={handleOpenDatasheet} />
 
         {/* Precision Engineering Lifecycle Methodology (Phase 4) */}
         <Process />
@@ -69,7 +82,16 @@ export default function App() {
       {/* Structured Footer */}
       <Footer />
 
-      {/* Interactive Modals */}
+      {/* Hardware E-Commerce Modals & Slide-over Drawer (Phase 5) */}
+      <ProductModal
+        product={selectedProductForModal}
+        isOpen={Boolean(selectedProductForModal)}
+        onClose={() => setSelectedProductForModal(null)}
+        onAddToCart={(product, qty) => addToCart(product, qty)}
+      />
+      <CartDrawer />
+
+      {/* Consultation & Discovery Modals */}
       <ContactModal
         isOpen={isContactOpen}
         onClose={() => {

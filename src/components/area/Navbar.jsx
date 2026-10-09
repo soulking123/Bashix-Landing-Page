@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useStore } from '../../context/StoreContext';
 
 export default function Navbar({ onOpenContact }) {
+  const { cartItemCount, setIsCartOpen } = useStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -25,6 +27,7 @@ export default function Navbar({ onOpenContact }) {
   const navLinks = [
     { label: 'Services', href: '#services' },
     { label: 'The Engine', href: '#engine' },
+    { label: 'Hardware', href: '#hardware' },
     { label: 'Methodology', href: '#methodology' },
     { label: 'Case Studies', href: '#cases' },
     { label: 'Estimator', href: '#estimator' },
@@ -49,7 +52,7 @@ export default function Navbar({ onOpenContact }) {
         </a>
 
         {/* Desktop Nav Items */}
-        <nav className="hidden md:flex items-center gap-8" aria-label="Main Navigation">
+        <nav className="hidden md:flex items-center gap-7" aria-label="Main Navigation">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -61,8 +64,30 @@ export default function Navbar({ onOpenContact }) {
           ))}
         </nav>
 
-        {/* Desktop CTA Button */}
-        <div className="hidden md:flex items-center">
+        {/* Desktop CTA & Cart Actions */}
+        <div className="hidden md:flex items-center gap-3">
+          {/* Shopping Cart Drawer Trigger */}
+          <button
+            type="button"
+            onClick={() => setIsCartOpen(true)}
+            className="relative p-2.5 rounded-full text-[#181B15] hover:bg-[#EEF2E8] border border-[#E2E6DC] transition-colors flex items-center justify-center cursor-pointer min-w-[44px] min-h-[44px]"
+            aria-label={`Open shopping cart with ${cartItemCount} items`}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.75}
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              />
+            </svg>
+            {cartItemCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-[#364121] text-[#FFFFFF] text-[10px] font-mono font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-xs">
+                {cartItemCount}
+              </span>
+            )}
+          </button>
+
           <button
             type="button"
             onClick={onOpenContact}
@@ -81,18 +106,41 @@ export default function Navbar({ onOpenContact }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M7 17L17 7M17 7H9M17 7V15"
+                d="M7 17L17 7H9M17 7V15"
               />
             </svg>
           </button>
         </div>
 
-        {/* Mobile Hamburger Toggle */}
-        <div className="flex md:hidden items-center gap-3">
+        {/* Mobile Header Actions */}
+        <div className="flex md:hidden items-center gap-2">
+          {/* Mobile Cart Trigger */}
+          <button
+            type="button"
+            onClick={() => setIsCartOpen(true)}
+            className="relative p-2 rounded-full text-[#181B15] hover:bg-[#EAECE6] border border-[#E2E6DC] transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label={`Open shopping cart with ${cartItemCount} items`}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.75}
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              />
+            </svg>
+            {cartItemCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-[#364121] text-[#FFFFFF] text-[10px] font-mono font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                {cartItemCount}
+              </span>
+            )}
+          </button>
+
+          {/* Mobile Hamburger Toggle */}
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2.5 rounded-lg text-[#181B15] hover:bg-[#EAECE6] transition-colors focus-visible:ring-2 focus-visible:ring-[#364121]"
+            className="p-2.5 rounded-lg text-[#181B15] hover:bg-[#EAECE6] transition-colors focus-visible:ring-2 focus-visible:ring-[#364121] min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={isMobileMenuOpen}
           >
@@ -123,7 +171,17 @@ export default function Navbar({ onOpenContact }) {
                 {link.label}
               </a>
             ))}
-            <div className="pt-2">
+            <div className="pt-2 flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsCartOpen(true);
+                }}
+                className="btn-secondary-pill w-full justify-center"
+              >
+                <span>Hardware Order Queue ({cartItemCount})</span>
+              </button>
               <button
                 type="button"
                 onClick={() => {
@@ -144,7 +202,7 @@ export default function Navbar({ onOpenContact }) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M7 17L17 7M17 7H9M17 7V15"
+                    d="M7 17L17 7H9M17 7V15"
                   />
                 </svg>
               </button>

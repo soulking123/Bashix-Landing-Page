@@ -9,6 +9,7 @@ export const StoreProvider = ({ children }) => {
   const [products, setProducts] = useState(initialProducts);
   const [siteConfig, setSiteConfig] = useState(initialConfig);
   const [activeView, setActiveView] = useState('landing'); // 'landing', 'store', 'admin'
+  const [currency, setCurrency] = useState('IDR'); // 'IDR' or 'USD'
   const [cart, setCart] = useState(() => {
     try {
       const saved = localStorage.getItem('bashix_cart');
@@ -34,6 +35,9 @@ export const StoreProvider = ({ children }) => {
         }
         if (loadedConfig) {
           setSiteConfig(loadedConfig);
+          if (loadedConfig.default_currency) {
+            setCurrency(loadedConfig.default_currency);
+          }
         }
       } catch (err) {
         console.error('Failed to initialize store data:', err);
@@ -87,13 +91,44 @@ export const StoreProvider = ({ children }) => {
 
   const clearCart = () => setCart([]);
 
-  const currency = 'IDR';
-
   const cartTotal = cart.reduce((sum, item) => {
-    return sum + (item.product.price_idr * item.quantity);
+    const unitPrice = currency === 'USD' ? (item.product.price_usd || 0) : (item.product.price_idr || 0);
+    return sum + (unitPrice * item.quantity);
   }, 0);
 
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Simulated Checkout Flow with Inventory Deduction
+  const checkout = async (customerData) => {
+    if (!cart || cart.length === 0) {
+      throw new Error('Cart is currently empty');
+    }
+
+    // Create order record with order line items in DB
+    const orderRecord = await db.orders.create(
+      {
+        ...customerData,
+        currency,
+        total_amount: cartTotal
+      },
+      cart
+    );
+
+    // Deduct stock for each ordered hardware item
+    for (const item of cart) {
+      const currentStock = item.product.stock_qty ?? 0;
+      const updatedStock = Math.max(0, currentStock - item.quantity);
+      await db.products.update(item.product.id, { stock_qty: updatedStock });
+    }
+
+    // Refresh products in memory
+    await refreshProducts();
+
+    // Clear cart upon successful order placement
+    clearCart();
+
+    return orderRecord;
+  };
 
   // Product CRUD wrappers
   const refreshProducts = async () => {
@@ -122,6 +157,9 @@ export const StoreProvider = ({ children }) => {
   const updateSettings = async (newConfig) => {
     const updated = await db.settings.update(newConfig);
     setSiteConfig(updated);
+    if (updated.default_currency) {
+      setCurrency(updated.default_currency);
+    }
     return updated;
   };
 
@@ -131,6 +169,7 @@ export const StoreProvider = ({ children }) => {
         products,
         siteConfig,
         currency,
+        setCurrency,
         activeView,
         setActiveView,
         cart,
@@ -142,6 +181,7 @@ export const StoreProvider = ({ children }) => {
         clearCart,
         cartTotal,
         cartItemCount,
+        checkout,
         isLoading,
         refreshProducts,
         addProduct,
