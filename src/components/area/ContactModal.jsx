@@ -1,20 +1,33 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { db } from '../../services/db';
 
-export default function ContactModal({ isOpen, onClose }) {
+export default function ContactModal({ isOpen, onClose, prefillData = null }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    company: '',
+    phone: '',
     domain: 'Industrial IoT & Telemetry',
     message: '',
   });
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [createdLeadId, setCreatedLeadId] = useState(null);
   const modalRef = useRef(null);
   const initialFocusRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      if (prefillData) {
+        setFormData((prev) => ({
+          ...prev,
+          domain: prefillData.domain || prev.domain,
+          message: prefillData.estimatedBudget
+            ? `Calculated Scope: ${prefillData.domain} (${prefillData.nodeCount} Units, ${prefillData.hardening}, ${prefillData.throughput})\nEstimated Budget: ${prefillData.estimatedBudget} [Timeline: ${prefillData.timeline}]`
+            : prev.message,
+        }));
+      }
       setTimeout(() => initialFocusRef.current?.focus(), 50);
     } else {
       document.body.style.overflow = '';
@@ -24,7 +37,7 @@ export default function ContactModal({ isOpen, onClose }) {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isOpen]);
+  }, [isOpen, prefillData]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -38,18 +51,44 @@ export default function ContactModal({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim()) {
+    if (!formData.name.trim()) {
       setStatus('error');
-      setErrorMessage('Please provide both your name and engineering contact email.');
+      setErrorMessage('Please provide your full name.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
+      setStatus('error');
+      setErrorMessage('Please provide a valid engineering or corporate email address.');
       return;
     }
 
     setStatus('submitting');
-    setTimeout(() => {
+    setErrorMessage('');
+
+    try {
+      const leadPayload = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        company: formData.company ? formData.company.trim() : null,
+        phone: formData.phone ? formData.phone.trim() : null,
+        domain: formData.domain,
+        message: formData.message.trim(),
+        source: prefillData ? 'Estimator' : 'Direct Consultation',
+        metadata: prefillData || null,
+      };
+
+      const result = await db.leads.create(leadPayload);
+      setCreatedLeadId(result?.id || `lead-${Date.now()}`);
       setStatus('success');
-    }, 600);
+    } catch (err) {
+      console.error('Lead submission failed:', err);
+      setStatus('error');
+      setErrorMessage('Failed to submit consultation request. Please retry or contact engineering directly.');
+    }
   };
 
   return (
@@ -85,9 +124,14 @@ export default function ContactModal({ isOpen, onClose }) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 id="contact-modal-title" className="font-display text-2xl text-[#181B15] mb-2">
+            <h3 id="contact-modal-title" className="font-display text-2xl text-[#181B15] mb-1">
               Engineering Inquiry Received
             </h3>
+            {createdLeadId && (
+              <p className="text-xs font-mono text-[#55623B] mb-3">
+                Tracking ID: {createdLeadId}
+              </p>
+            )}
             <p className="text-sm text-[#4A4E44] max-w-xs mx-auto mb-6">
               Thank you, {formData.name}. Our systems engineering team will review your specifications and reply to {formData.email} within 24 hours.
             </p>
@@ -119,26 +163,42 @@ export default function ContactModal({ isOpen, onClose }) {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="name-input" className="block text-xs font-medium text-[#181B15] mb-1.5">
-                  Full Name
-                </label>
-                <input
-                  id="name-input"
-                  ref={initialFocusRef}
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="e.g. Dr. Alex Mercer"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2E6DC] text-sm text-[#181B15] bg-[#FAFAF8] focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#364121]"
-                />
+            <form onSubmit={handleSubmit} className="space-y-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label htmlFor="name-input" className="block text-xs font-medium text-[#181B15] mb-1.5">
+                    Full Name *
+                  </label>
+                  <input
+                    id="name-input"
+                    ref={initialFocusRef}
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="e.g. Dr. Alex Mercer"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2E6DC] text-sm text-[#181B15] bg-[#FAFAF8] focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#364121]"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="company-input" className="block text-xs font-medium text-[#181B15] mb-1.5">
+                    Organization / Company
+                  </label>
+                  <input
+                    id="company-input"
+                    type="text"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    placeholder="e.g. Atlas Robotics Inc."
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#E2E6DC] text-sm text-[#181B15] bg-[#FAFAF8] focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-[#364121]"
+                  />
+                </div>
               </div>
 
               <div>
                 <label htmlFor="email-input" className="block text-xs font-medium text-[#181B15] mb-1.5">
-                  Work / Engineering Email
+                  Work / Engineering Email *
                 </label>
                 <input
                   id="email-input"

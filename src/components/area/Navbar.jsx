@@ -23,11 +23,11 @@ export default function Navbar({ onOpenContact }) {
   }, [isMobileMenuOpen]);
 
   const navLinks = [
-    { label: 'Capabilities', href: '#capabilities' },
     { label: 'Services', href: '#services' },
     { label: 'The Engine', href: '#engine' },
-    { label: 'Specifications', href: '#specifications' },
-    { label: 'Deployment', href: '#architecture' },
+    { label: 'Methodology', href: '#methodology' },
+    { label: 'Case Studies', href: '#cases' },
+    { label: 'Estimator', href: '#estimator' },
   ];
 
   return (
