@@ -57,16 +57,28 @@ export default function SiteSettings() {
           Landing Page CMS Settings
         </h1>
         <p className="text-sm text-[#4A4E44] mt-0.5">
-          Configure live landing page announcement copy, contact endpoints, and currency default.
+          Configure live landing page announcement copy, contact endpoints, and currency default without touching code.
         </p>
       </div>
 
       <form onSubmit={handleSave} className="bg-[#FFFFFF] p-6 sm:p-8 rounded-2xl border border-[#E2E6DC] shadow-xs space-y-6">
-        {/* Announcement Badge */}
-        <div>
-          <label htmlFor="hero_badge" className="block text-xs font-mono font-medium text-[#4A4E44] mb-1">
-            Hero Eyebrow Announcement Badge
-          </label>
+        {/* Announcement Badge & Visibility Toggle */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label htmlFor="hero_badge" className="block text-xs font-mono font-medium text-[#4A4E44]">
+              Hero Eyebrow Announcement Badge
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                name="announcement_active"
+                checked={formData.announcement_active !== false}
+                onChange={handleChange}
+                className="w-4 h-4 rounded text-[#364121] focus:ring-[#364121]"
+              />
+              <span className="text-xs font-mono text-[#55623B]">Active & Visible</span>
+            </label>
+          </div>
           <input
             id="hero_badge"
             name="hero_badge"
