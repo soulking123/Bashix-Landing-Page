@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/area/Navbar';
 import Hero from './components/area/Hero';
 import Benefits from './components/area/Benefits';
@@ -17,14 +17,51 @@ import ContactModal from './components/area/ContactModal';
 import DiscoverModal from './components/area/DiscoverModal';
 import ProductModal from './components/shop/ProductModal';
 import CartDrawer from './components/shop/CartDrawer';
+import AdminPortal from './components/admin/AdminPortal';
 import { useStore } from './context/StoreContext';
 
 export default function App() {
-  const { addToCart } = useStore();
+  const { addToCart, activeView, setActiveView } = useStore();
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
   const [contactPrefill, setContactPrefill] = useState(null);
   const [selectedProductForModal, setSelectedProductForModal] = useState(null);
+
+  // Manual route & hotkey listener for admin view
+  useEffect(() => {
+    const handleRoute = () => {
+      const hash = window.location.hash.toLowerCase();
+      const path = window.location.pathname.toLowerCase();
+      const search = window.location.search.toLowerCase();
+
+      if (hash === '#admin' || path === '/admin' || search.includes('admin')) {
+        setActiveView('admin');
+      } else if (hash === '' || hash.startsWith('#')) {
+        if (hash !== '#admin' && activeView === 'admin') {
+          setActiveView('landing');
+        }
+      }
+    };
+
+    handleRoute();
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('popstate', handleRoute);
+
+    // Operator console shortcut: Ctrl+Shift+A or Cmd+Shift+A
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        setActiveView((prev) => (prev === 'admin' ? 'landing' : 'admin'));
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('hashchange', handleRoute);
+      window.removeEventListener('popstate', handleRoute);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeView, setActiveView]);
 
   const handleOpenContact = (prefill = null) => {
     setContactPrefill(prefill);
@@ -34,6 +71,11 @@ export default function App() {
   const handleOpenDatasheet = (product) => {
     setSelectedProductForModal(product);
   };
+
+  // If in Admin Management Console View (Phase 6)
+  if (activeView === 'admin') {
+    return <AdminPortal />;
+  }
 
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#181B15] flex flex-col selection:bg-[#D4DEC5] selection:text-[#181B15]">
