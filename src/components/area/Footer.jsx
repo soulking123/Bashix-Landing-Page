@@ -2,9 +2,12 @@ import React from 'react';
 
 export default function Footer() {
   const footerLinks = [
-    { label: 'Capabilities', href: '#capabilities' },
+    { label: 'Capabilities', href: '#services' },
+    { label: 'Hardware', href: '#hardware' },
     { label: 'Specifications', href: '#specifications' },
-    { label: 'Architecture', href: '#architecture' },
+    { label: 'Architecture', href: '#engine' },
+    { label: 'Methodology', href: '#methodology' },
+    { label: 'Case Studies', href: '#cases' },
   ];
 
   return (
@@ -53,9 +56,19 @@ export default function Footer() {
           <span>&copy; Bashix Engineering. 2025</span>
         </div>
 
-        {/* Right: Rights Reserved */}
-        <div className="text-xs font-mono text-[#55623B] tracking-wider uppercase">
-          All Rights Reserved
+        {/* Right: Console Access & Rights Reserved */}
+        <div className="flex items-center gap-4 text-xs font-mono text-[#55623B]">
+          <a
+            href="#admin"
+            className="hover:text-[#181B15] transition-colors underline-offset-4 hover:underline"
+            title="Administrator Management Console"
+          >
+            Admin Console
+          </a>
+          <span className="text-[#ECEFE8]">&bull;</span>
+          <span className="tracking-wider uppercase">
+            All Rights Reserved
+          </span>
         </div>
       </div>
     </footer>
